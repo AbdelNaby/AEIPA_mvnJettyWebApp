@@ -9,6 +9,11 @@
     </head>
     <body>
         <h1>Hello World!</h1>
+        <form action="FilesUpload" method="post" enctype="multipart/form-data">
+        	<input type="file" name="file" multiple/>
+        	<input type="submit"/>
+        
+        </form>
         
         <form action="DockerClientServlet" method="post">
 	    	Enter your name: <input type="text" name="yourName" size="20">

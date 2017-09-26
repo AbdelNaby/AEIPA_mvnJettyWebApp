@@ -8,9 +8,20 @@
     	<servlet-name>DockerClientServlet</servlet-name>
     	<servlet-class>org.acil.aeipa.AEIPA_mvnJettyWebApp.DockerClientServlet</servlet-class>
     </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>FilesUpload</display-name>
+    	<servlet-name>FilesUpload</servlet-name>
+    	<servlet-class>uploadfiles.FilesUpload</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>DockerClientServlet</servlet-name>
     	<url-pattern>/DockerClientServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>FilesUpload</servlet-name>
+    	<url-pattern>/FilesUpload</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
