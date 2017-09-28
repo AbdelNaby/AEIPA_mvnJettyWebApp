@@ -9,7 +9,7 @@
     </head>
     <body>
         <h1>Hello World!</h1>
-        <form action="FilesUpload" method="post" enctype="multipart/form-data">
+        <form action="IPASupplierServlet" method="post" enctype="multipart/form-data">
         	<input type="file" name="file" multiple/>
         	<input type="submit"/>
         
