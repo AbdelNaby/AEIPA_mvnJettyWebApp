@@ -42,19 +42,19 @@ public class IPASupplierServlet extends HttpServlet {
 		try {
 			List<FileItem> multifiles = sf.parseRequest(request);
 			FilesUpload uploadingIPA = new FilesUpload(uploadedIPAFilePath, multifiles);
-			CrunchifyMySQLDBTutorial dbTest = new CrunchifyMySQLDBTutorial();
-			System.out.println("==========> Database done !!!!");
+//			CrunchifyMySQLDBTutorial dbTest = new CrunchifyMySQLDBTutorial();
+//			System.out.println("==========> Database done !!!!");
 			
 			
 			PrintWriter writer = response.getWriter();
 			writer.println("<h1>Hello ooooooooooooooo " + "</h1>");
 			
 	        writer.println( "Hello World!" );
-	        writer.println( "==========> Database done !!!!" );
+	        
 	        
 	        
 			// Docker Client Code:
-/*			List<String> uploadedIPAfiles = uploadingIPA.getUploadedFilesNames();
+			List<String> uploadedIPAfiles = uploadingIPA.getUploadedFilesNames();
 			  try {
 			        String[][] commands = new String[][] {
 		                new String[] {"ls", "-l" },
@@ -73,6 +73,10 @@ public class IPASupplierServlet extends HttpServlet {
 	      
 	        IPADockerClient IPAdc = new IPADockerClient();
 			IPAdc.createJavaContainer(commands);
+			
+			System.out.println("\n ===> Done executing the uploaded IPA!");
+			writer.println( "\n ===> Done executing the uploaded IPA!" );
+			
 			} catch (DockerException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -80,8 +84,11 @@ public class IPASupplierServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			*/
 			
+				CrunchifyMySQLDBTutorial dbTest = new CrunchifyMySQLDBTutorial();
+				System.out.println("\n ====> Database queries are done !!!!");
+				writer.println( "\n==========> Database done !!!!" );
+				
 		} catch (FileUploadException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
