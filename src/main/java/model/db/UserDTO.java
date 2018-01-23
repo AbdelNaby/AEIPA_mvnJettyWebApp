@@ -1,20 +1,37 @@
 package model.db;
 
-public class User {
-	protected String userName = null;
-	protected String password = null;
-	protected String firstName = null;
-	protected String lastName = null;
-	protected String email = null;
-	protected String dateOfBirth = null;
-	protected String organization = null;
-	protected String job = null;
-	protected String tableName = "USER";
+import java.sql.Date;
+
+// Data Object
+
+// A POJO Class
 
 
+public class UserDTO extends GenericDTO{
+	private String userName;
+	private String password;
+	private String firstName;
+	private String lastName;
+	private String email;
+	private String dateOfBirth;
+	private String organization;
+	private String job;
+	/*
+	//private List<String> iPAsList;
+	//private List<String> datasets;
+	*/
 
-
+//	public abstract User retrieveUserIfExists(String userName, String password);
+//	public abstract void saveUserInDatabase();
+	public UserDTO()
+	{}
 	
+	public UserDTO (String userName,String password )
+	{
+		this.userName = userName;
+		this.password = password;
+	}
+
 	/**
 	 * @return the userName
 	 */
@@ -24,15 +41,22 @@ public class User {
 
 	/**
 	 * @param userName the userName to set
+	 * @see userName should be unique and not less than 6 characters
+	 * only letters, numbers, _ are allowed
+	 * 
+	 * 
+	 * 
+	 * 
 	 */
 	public void setUserName(String userName) {
+	
 		this.userName = userName;
 	}
 
 	/**
 	 * @return the password
 	 */
-	protected String getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
@@ -49,7 +73,7 @@ public class User {
 	/**
 	 * @return the firstName
 	 */
-	protected String getFirstName() {
+	public String getFirstName() {
 		return firstName;
 	}
 

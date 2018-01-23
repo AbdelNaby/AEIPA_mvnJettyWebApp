@@ -85,7 +85,7 @@ public class IPASupplierServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-				CrunchifyMySQLDBTutorial dbTest = new CrunchifyMySQLDBTutorial();
+				//CrunchifyMySQLDBTutorial dbTest = new CrunchifyMySQLDBTutorial();
 				System.out.println("\n ====> Database queries are done !!!!");
 				writer.println( "\n==========> Database done !!!!" );
 				

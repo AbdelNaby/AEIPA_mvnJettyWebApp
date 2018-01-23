@@ -17,24 +17,29 @@ import com.spotify.docker.client.messages.ExecCreation;
 import com.spotify.docker.client.messages.ExecState;
 import com.spotify.docker.client.messages.HostConfig;
 import com.spotify.docker.client.messages.HostConfig.Bind;
+
  
 public class IPADockerClient {
  
     
-	  public void createJavaContainer( String[][] commands) throws DockerException, InterruptedException, IOException {
+	  public void createJavaContainer( String[][] commands) 
+			  throws DockerException, InterruptedException, IOException {
 	        System.out.println( "Hello from create DockerClient" ) ;
-	        DockerClient docker = new DefaultDockerClient("unix:///var/run/docker.sock");
+	        DockerClient docker = 
+	        		new DefaultDockerClient("unix:///var/run/docker.sock");
 	         
 	        System.out.println( "Pinging" ) ;
 	        String pingResult = docker.ping() ;
 	        System.out.println( "Ping result " + pingResult ) ;
 	 
 	        String imageName = "dc1:8" ;
-	        String guestPath = "/app" ;
-	        String hostPath = getHostPath( "app" ) ;
-	        System.out.println( "Working directory is " +hostPath+ " on the host system.") ;
+	        String guestPath = "/IPAResult" ;
+	        String hostPath = getHostPath( "IPAResult" ) ;
+	        System.out.println( "Working directory is " 
+	        		+ hostPath + " on the host system.") ;
 	         
-	        String containerId = startContainer(docker, imageName, guestPath, hostPath);
+	        String containerId = startContainer(docker, imageName, 
+	        		guestPath, hostPath);
 	         
 //	        commands = new String[][] {
 //	                new String[] {"ls", "-l" },
@@ -290,7 +295,7 @@ public class IPADockerClient {
 	        File hostDir = new File(cwd, name ) ;
 	        if( ! hostDir.exists() ) {
 	            boolean ok = hostDir.mkdir() ;
-	            if( !ok ) throw new IOException( "Couldn't make ./" +name+ " directory" ) ;
+	            if( !ok ) throw new IOException( "Couldn't make ./" + name + " directory" ) ;
 	        }
 	         
 	        return hostDir.getCanonicalPath() ;
