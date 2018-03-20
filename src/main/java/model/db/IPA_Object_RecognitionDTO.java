@@ -30,7 +30,7 @@ public abstract class IPA_Object_RecognitionDTO extends IPADTO {
 	@Override
 	protected String iPASubType() {
 		// TODO Auto-generated method stub
-		return "Object_Recognition/";
+		return "Object_Recognition/" + iPA_Object_RecognitionSubType();
 	}
 	protected abstract String iPA_Object_RecognitionSubType();
 }

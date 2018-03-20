@@ -6,9 +6,9 @@
         <title>AEIPA Login Page</title>
     </head>
     <body bgcolor="#669900">
-        <form method="post" action="UserLoginServlet">
+        <form method="post" action="UserValidationServlet">
             <center>
-            <table border="0" width="30%" cellpadding="3">
+            <table border="1" width="30%" cellpadding="3">
                 <thead>
                     <tr>
                         <th colspan="2">AEIPA Login Page</th>
@@ -28,7 +28,7 @@
                         <td><input type="reset" value="Reset" /></td>
                     </tr>
                     <tr>
-                        <td colspan="2">New User <a href="register.jsp">Register Here</a></td>
+                        <td colspan="2">New User: <a href="register.jsp">Register Here</a></td>
                     </tr>
                 </tbody>
             </table>

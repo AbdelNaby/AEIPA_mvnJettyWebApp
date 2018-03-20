@@ -4,26 +4,31 @@
 package model.db;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
+
+import com.google.common.io.Files;
 
 /**
  * @author acil
  *
  */
 public abstract class FolderService<T extends FolderDTO> extends GenericService<T>{
-	protected T dto;
+//	protected T dto;
 	/**
 	 * @param dto
 	 */
 
-	public FolderService(T dto) {
-		super(dto);
-		this.dto = dto;
-		//dto.getFullPath();
-	}
+//	public FolderService(T dto) {
+//		super(dto);
+//		this.dto = dto;
+//		//dto.getFullPath();
+//	}
 	public FolderService() 	{
 		// Just for enabling creating objects without any mandatory parameters
 	}
@@ -37,19 +42,28 @@ public abstract class FolderService<T extends FolderDTO> extends GenericService<
 	 * will contain all the uploaded files
 	 * @param multifiles the files to be uploaded
 	 */
-	public void filesUpload(List<FileItem> multifiles) {
+	public void uploadFiles(List<FileItem> multifiles, T dto) {
 		//this.folderPath = folderPath;
 		//setUploadedFilesNames(new ArrayList<String>());
+		System.out.println("hello !!!");
+//		for(int i=1;i<multifiles.size(); i++)
+//		{
+//			System.out.println("hellozz !!!");
+//			FileItem item = multifiles.get(i);
+//			oneFileUpload(item, dto);
+//		}
 		for(FileItem item:multifiles)
 		{
-			oneFileUpload(item);				 
+			System.out.println("hellozz !!!");
+			oneFileUpload(item, dto);				 
 		}
 	}
 	
-	protected void oneFileUpload(FileItem item)  {
+	protected void oneFileUpload(FileItem item, T dto)  {
+		System.out.println("hellozz test !!!");
 		try {
 			item.write(new File(dto.getFullPath() + item.getName()));
-			System.out.println("Done Uploading File .. "+ dto.getFullPath() + item.getName());	
+			System.out.println("Have Done Uploading File .. "+ dto.getFullPath() + item.getName());	
 			dto.setFilesNameList(item.getName());
 		}
 		catch(Exception e) {
@@ -87,37 +101,67 @@ public abstract class FolderService<T extends FolderDTO> extends GenericService<
 	/**
 	 * @return the uploadedFilesNames List
 	 */
-	public ArrayList<String> getUploadedFilesNames() {
+	public ArrayList<String> getUploadedFilesNames(T dto) {
 		return dto.getFilesNameList();
 	}
-	public boolean validateData()
+	
+	
+	
+	public boolean validateData(T dto)
 	{	
-		if (name_IsValid()
-				&& validateDatabyType())
+		if (name_IsValid(dto.getName()) && type_IsValid(dto.getType())
+				&& validateDatabyType(dto))
 			return true;
 		return false;
 	}
-	protected abstract boolean validateDatabyType();
+	protected abstract boolean validateDatabyType(T dto);
 	
-	public boolean name_IsValid()
+	public boolean name_IsValid(String folderName)
 	{
-		IPADAO iPADAO= new IPADAO();
-		String iPAName = dto.getName();
 		//Checking Name has value
-		if(iPAName.isEmpty())
+		if(folderName.isEmpty())
 		{
-			System.out.println("IPA Name is mandatory. Please enter a value.");
-			return false;
-		}
-		//Checking Name is unique
-		if(iPADAO.display(iPADAO.getAttributeList().get(2), "=", iPAName) != null)
-		{
-			System.out.println("IPA Name: " + iPAName + " already exists, Please enter another name.");
+			System.out.println("folder Name is mandatory. Please enter a value.");
 			return false;
 		}
 		return true;
 	}
-
+	public boolean type_IsValid(String type)
+	{
+		//Checking Name has value
+		if(type.isEmpty())
+		{
+			System.out.println("Type is mandatory. Please enter a value.");
+			return false;
+		}
+		return true;
+	}
+	protected boolean createDirectory(String fullPath)
+	{
+		  File file = new File(fullPath);
+	        if (!file.exists()) {
+	            if (file.mkdirs()) {
+	                System.out.println("Directory is created! " + file.getAbsolutePath());
+					return true;
+	            } else {
+	                System.out.println("Failed to create directory! "  + file.getAbsolutePath());
+					return false;
+	            }
+	        }
+		
+//		Path path = Paths.get(fullPath);
+//        //if directory exists?
+//        if (!Files.exists(path)) {
+//            try {
+//                Files.createDirectories(path);
+//            } catch (IOException e) {
+//                //fail to create directory
+//                e.printStackTrace();
+//            }
+//        }
+			return true;
+		
+	}
 
 //	{
 //		validateData();

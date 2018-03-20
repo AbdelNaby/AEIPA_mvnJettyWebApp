@@ -11,18 +11,20 @@ import java.util.ArrayList;
  */
 
 public abstract class FolderDTO extends GenericDTO {
-	protected String id;
-	protected String userName;
-	protected String name;
-	private ArrayList<String> filesNameList;
-	protected String type;
+	public String userName;
+	public String name;
+	private ArrayList<String> filesNameList = new ArrayList<String>();
+	public String 	type;
 	private String defaultPath;
 	private String fullPath;
-	protected String description;
+	public String description;
 
 	FolderDTO()
 	{
-		// Just for enabling creating objects without any mandatory parameters	
+		// Just for enabling creating objects without any mandatory parameters
+		setDefaultPath();
+		setType();
+		setFullPath();
 	}
 	FolderDTO(String folderName)
 	{
@@ -36,7 +38,6 @@ public abstract class FolderDTO extends GenericDTO {
 	/**
 	 * @return the defaultPath
 	 */
-	@SuppressWarnings("unused")
 	private String getDefaultPath() {
 		return defaultPath;
 	}
@@ -58,15 +59,11 @@ public abstract class FolderDTO extends GenericDTO {
 
 	public String getType()
 	{
-//		 System.out.println("splitting of sprint starts \n");
-//	        
-//	        for (int i = 0; i < paths.length; i++) {
-//	            System.out.println("paths::"+i+" "+paths[i]+"\n");
-//	        }
-//	        System.out.println("splitting of sprint ends");
-	        
+		// Return the last Type in the Hierarchy
+	    System.out.println("Folder Type is: " + type);    
 	    String[] paths = type.split("/");
-		return paths[paths.length];
+	    System.out.println("Folder Type splitted is: " + paths[paths.length-1]); 
+		return paths[paths.length-1];
 	}
 	/**
 	 * @return the name
@@ -89,23 +86,9 @@ public abstract class FolderDTO extends GenericDTO {
 	/**
 	 * @param fullPath the fullPath to set
 	 */
-	private void setFullPath() {
-		this.fullPath = defaultPath + getType() + name +"/";
-	}
-	
-
-	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
+	protected void setFullPath() {
+		this.fullPath = defaultPath + type +"/" + name +"/";
+		System.out.println("The fullPath is : " + fullPath);
 	}
 
 	/**

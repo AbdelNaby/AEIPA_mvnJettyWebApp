@@ -26,7 +26,7 @@ public class BenchmarkDatasetDTO_GroundTruth extends BenchmarkDatasetDTO {
 	 */
 	@Override
 	protected String benchmarkDatasetSubType() {
-		return "GroundTruth/";
+		return "GroundTruth";
 	}
 
 }

@@ -9,7 +9,7 @@ package model.db;
  */
 public class BenchmarkDatasetDTO_BoundingBoxLabeled extends BenchmarkDatasetDTO {
 
-	protected String xYLabelSheetName;
+	
 	public BenchmarkDatasetDTO_BoundingBoxLabeled()
 	{
 		// Just for enabling creating objects without any mandatory parameters
@@ -29,21 +29,8 @@ public class BenchmarkDatasetDTO_BoundingBoxLabeled extends BenchmarkDatasetDTO 
 	@Override
 	protected String benchmarkDatasetSubType() {
 		// TODO Auto-generated method stub
-		return "BoundingBoxLabeled/";
+		return "BoundingBoxLabeled";
 	}
-
-	/**
-	 * @return the xYLabelSheetName
-	 */
-	public String getxYLabelSheetName() {
-		return xYLabelSheetName;
-	}
-
-	/**
-	 * @param xYLabelSheetName the xYLabelSheetName to set
-	 */
-	public void setxYLabelSheetName(String xYLabelSheetName) {
-		this.xYLabelSheetName = xYLabelSheetName;
-	}
+	
 
 }

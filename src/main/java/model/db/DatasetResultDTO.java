@@ -7,19 +7,19 @@ package model.db;
  * @author acil
  *
  */
-public class ResultDatasetDTO extends DatasetDTO {
+public class DatasetResultDTO extends DatasetDTO {
 
 	/**
 	 * 
 	 */
-	public ResultDatasetDTO() {
+	public DatasetResultDTO() {
 		// Just for enabling creating objects without any mandatory parameters
 	}
 
 	/**
 	 * @param folderName
 	 */
-	public ResultDatasetDTO(String folderName) {
+	public DatasetResultDTO(String folderName) {
 		super(folderName);
 		// TODO Auto-generated constructor stub
 	}
@@ -29,7 +29,7 @@ public class ResultDatasetDTO extends DatasetDTO {
 	 */
 	@Override
 	protected String datasetSubType() {
-		return "ResultDataset/";
+		return "DatasetResult";
 	}
 
 

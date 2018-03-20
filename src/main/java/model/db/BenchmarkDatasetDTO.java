@@ -7,7 +7,7 @@ package model.db;
  * @author acil
  *
  */
-public abstract class BenchmarkDatasetDTO extends DatasetDTO {
+public abstract class  BenchmarkDatasetDTO extends DatasetDTO {
 
 	public BenchmarkDatasetDTO()
 	{
@@ -21,5 +21,5 @@ public abstract class BenchmarkDatasetDTO extends DatasetDTO {
 	protected String datasetSubType() {
 		return "BenchmarkDtataset/" + benchmarkDatasetSubType();
 	}
-	protected abstract String benchmarkDatasetSubType() ;
+	protected abstract String benchmarkDatasetSubType();
 }

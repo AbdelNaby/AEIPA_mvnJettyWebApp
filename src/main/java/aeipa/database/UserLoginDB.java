@@ -61,7 +61,7 @@ public class UserLoginDB {
 
 		   
 			// MySQL Select Query 
-			String ValidateUserQueryStatement = "select * from USER where username='" + username + "' and password='" +password + "'";
+			String ValidateUserQueryStatement = "select * from USER2 where username='" + username + "' and password='" +password + "'";
  
 			aeipaPrepareStat = aeipaDBConn.prepareStatement(ValidateUserQueryStatement);
 			

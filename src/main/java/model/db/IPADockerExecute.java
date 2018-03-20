@@ -9,10 +9,7 @@ package model.db;
  */
 public class IPADockerExecute extends IPAExecute {
 
-	public void execute(IPADTO iPADTO, InputDatasetDTO inputDatasetDTO) {
-		
-		
-	}
+
 
 	@Override
 	public boolean executeIPA(IPADTO iPADTO, InputDatasetDTO inputDatasetDTO) {

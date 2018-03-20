@@ -26,7 +26,7 @@ public class BenchmarkDatasetDTO_BoundingBox extends BenchmarkDatasetDTO {
 	 */
 	@Override
 	protected String benchmarkDatasetSubType() {
-		return "BoundingBoxes/";
+		return "BoundingBox";
 	}
 
 }

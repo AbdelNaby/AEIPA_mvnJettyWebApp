@@ -11,12 +11,15 @@ import java.util.ArrayList;
  */
 public abstract class GenericDAO <T extends GenericDTO>{
 	private DBConnection operationDBCon;
-	protected ArrayList<String> attributeList;
+	public ArrayList<String> attributeList;
 	private ArrayList<String> conditionOpList;
 	private ArrayList<String> connectorOpList;
 	
 	GenericDAO()
 	{
+		attributeList = new ArrayList<String>();
+		conditionOpList = new ArrayList<String>();
+		connectorOpList = new ArrayList<String>();
 		setAttributeList();
 		createDBConnection();
 	}
@@ -25,7 +28,10 @@ public abstract class GenericDAO <T extends GenericDTO>{
 	 */
 	protected abstract String tableName();
 	protected abstract ArrayList<String> valueList(T dto);
-	protected abstract ArrayList<T> convertToDTO(ResultSet rs);
+	//function is not needed anymore
+	//protected abstract ArrayList<T> convertToDTO(ResultSet rs);
+	protected abstract ArrayList<T> convertArrayListToArrayDTOs(ArrayList<String> arrayList);
+
 	
 	/**
 	 * @return the attributeList
@@ -58,7 +64,7 @@ public abstract class GenericDAO <T extends GenericDTO>{
 		return true;
 	}
 
-	public  boolean update(T dto, String attributeValue, String conditionOp, String value)
+	public  boolean update(T newDTO, String attributeValue, String conditionOp, String conditionValue)
 	{
 		if (!attributeList.contains(attributeValue))
 		{
@@ -73,7 +79,7 @@ public abstract class GenericDAO <T extends GenericDTO>{
 			return false;
 		}
 		boolean isSuccess = operationDBCon.updateDataToDB(tableName(),getAttributeList(),
-				valueList(dto), attributeValue, conditionOp, value);
+				valueList(newDTO), attributeValue, conditionOp, conditionValue);
 		if (!isSuccess)
 		{
 			System.out.println(" Data  in Generic DAO Failed to be inserted ");
@@ -97,19 +103,25 @@ public abstract class GenericDAO <T extends GenericDTO>{
 			System.out.println("The conditionOp doesn't exist in the conditionOpList");
 			return null;
 		}
-		ResultSet rs = operationDBCon.selectDataFromDB(tableName(), attributeValue, conditionOp, value);
-		if(rs.equals(null))
+		ArrayList<String> selectedData = operationDBCon.selectDataFromDB(tableName(), attributeValue, conditionOp, value);
+		if(selectedData == null)
 		{
 			System.out.println(" Cannot display data Generic DAO Failed to select ");
 			return null;
 		}
-		ArrayList<T> dtoList= convertToDTO(rs);
+		ArrayList<T> dtoList= convertArrayListToArrayDTOs(selectedData);
 
-		System.out.println(" Display  in Generic DAO  successfully");
+		System.out.println(" Display  in Generic DAO  successfully executed");
 		return dtoList;
 	}
 	
-	
+//	public ArrayList<T> displayManyConditions(ArrayList<String> chkAttributeList, 
+//			ArrayList<String> chkConditionOpList, 
+//			ArrayList<String> chkValueList)
+//	{
+//		return displayManyConditions(chkAttributeList, chkConditionOpList, null,chkValueList);
+//		
+//	}
 	public ArrayList<T> displayManyConditions(ArrayList<String> chkAttributeList, 
 			ArrayList<String> chkConditionOpList, 
 			ArrayList<String> chkConnectorOpList, 
@@ -154,15 +166,17 @@ public abstract class GenericDAO <T extends GenericDTO>{
 				return null;
 			}
 		}
+		System.out.println("Going to construct the selectDataFromDB_MultiCondition ");
 		
-		ResultSet rs = operationDBCon.selectDataFromDB_MultiCondition(tableName(),  
+		ArrayList<String> selectedData = operationDBCon.selectDataFromDB_MultiCondition(tableName(),  
 				chkAttributeList, chkConditionOpList, chkConnectorOpList, chkValueList);
-		if(rs.equals(null))
-		{
-			System.out.println(" Cannot display data Generic DAO Failed to select ");
-			return null;
-		}
-		ArrayList<T> dtoList= convertToDTO(rs);
+		ArrayList<T> dtoList = convertArrayListToArrayDTOs(selectedData);
+//		if(rs.equals(null))
+//		{
+//			System.out.println(" Cannot display data Generic DAO Failed to select ");
+//			return null;
+//		}
+//		ArrayList<T> dtoList= convertToDTO(rs);
 
 		System.out.println(" Display  in Generic DAO  successfully");
 		return dtoList;

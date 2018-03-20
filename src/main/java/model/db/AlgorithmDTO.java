@@ -10,9 +10,9 @@ package model.db;
 public abstract class AlgorithmDTO extends FolderDTO {
 	
 	
-	protected String mainFileName;
-	protected String progLanguageName;
-	protected String progLanguageNum;
+	public String mainFileName;
+	public String progLanguageName;
+	public String progLanguageNum;
 	/**
 	 * @param folderName
 	 */
@@ -70,7 +70,8 @@ public abstract class AlgorithmDTO extends FolderDTO {
 	/**
 	 * @param mainFileName the mainFileName to set
 	 */
-	public void setMainFileName(String mainFileName) {
+	public void setMainFileName(String mainFileName) 
+	{
 		this.mainFileName = mainFileName;
 	}
 

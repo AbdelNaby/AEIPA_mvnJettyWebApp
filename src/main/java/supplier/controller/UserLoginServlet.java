@@ -2,15 +2,15 @@ package supplier.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
+
 import aeipa.database.UserLoginDB;
-import javax.servlet.http.*;
 
 /**
  * Servlet implementation class UserLoginServlet
@@ -35,7 +35,7 @@ public class UserLoginServlet extends HttpServlet {
 	    PrintWriter writer = response.getWriter();
 	    UserLoginDB user = new UserLoginDB(username, password);
 	    username = user.UserLogin();
-	    if (username == null)
+	    if (username == null || password == null)
 	    {
 	    	//out.println("Invalid password <a href='index.jsp'>try again</a>");
 	    	

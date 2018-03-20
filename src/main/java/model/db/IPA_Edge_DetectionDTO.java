@@ -30,7 +30,7 @@ public class IPA_Edge_DetectionDTO extends IPA_Image_SegmentationDTO {
 	@Override
 	protected String image_SegmentationSubType() {
 		// TODO Auto-generated method stub
-		return "Edge_Detection/";
+		return "Edge_Detection";
 	}
 
 }

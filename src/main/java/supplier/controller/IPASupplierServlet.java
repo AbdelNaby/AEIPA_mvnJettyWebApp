@@ -20,7 +20,7 @@ import supplier.model.FilesUpload;
 import supplier.model.IPADockerClient;
 import aeipa.database.*;
 /**
- * Servlet implementation class IpaSupplierServlet
+ * Servlet implementation class IPASupplierServlet
  */
 public class IPASupplierServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -18,13 +18,116 @@
     	<servlet-name>UserLoginServlet</servlet-name>
     	<servlet-class>supplier.controller.UserLoginServlet</servlet-class>
     </servlet>
+
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>UserValidationServlet</display-name>
+    	<servlet-name>UserValidationServlet</servlet-name>
+    	<servlet-class>controller.UserValidationServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>UserRegistrationServlet</display-name>
+    	<servlet-name>UserRegistrationServlet</servlet-name>
+    	<servlet-class>controller.UserRegistrationServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>IPACreateNewServlet</display-name>
+    	<servlet-name>IPACreateNewServlet</servlet-name>
+    	<servlet-class>controller.IPACreateNewServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>IPAUploadServlet</display-name>
+    	<servlet-name>IPAUploadServlet</servlet-name>
+    	<servlet-class>controller.IPAUploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>InputDatasetCreatNewServlet</display-name>
+    	<servlet-name>InputDatasetCreatNewServlet</servlet-name>
+    	<servlet-class>controller.InputDatasetCreatNewServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>DatasetUploadServlet</display-name>
+    	<servlet-name>DatasetUploadServlet</servlet-name>
+    	<servlet-class>controller.DatasetUploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>BenchmarkDatasetUploadServlet</display-name>
+    	<servlet-name>BenchmarkDatasetUploadServlet</servlet-name>
+    	<servlet-class>controller.BenchmarkDatasetUploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>IPADatasetSearchServlet</display-name>
+    	<servlet-name>IPADatasetSearchServlet</servlet-name>
+    	<servlet-class>controller.IPADatasetSearchServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>IPAJavaDockerExecuteServlet</display-name>
+    	<servlet-name>IPAJavaDockerExecuteServlet</servlet-name>
+    	<servlet-class>controller.IPAJavaDockerExecuteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
     	<servlet-name>IPASupplierServlet</servlet-name>
     	<url-pattern>/IPASupplierServlet</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+    	<servlet-name>UserValidationServlet</servlet-name>
+    	<url-pattern>/UserValidationServlet</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
     	<servlet-name>UserLoginServlet</servlet-name>
     	<url-pattern>/UserLoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>UserRegistrationServlet</servlet-name>
+    	<url-pattern>/UserRegistrationServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>IPACreateNewServlet</servlet-name>
+    	<url-pattern>/IPACreateNewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>IPAUploadServlet</servlet-name>
+    	<url-pattern>/IPAUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>InputDatasetCreatNewServlet</servlet-name>
+    	<url-pattern>/InputDatasetCreatNewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DatasetUploadServlet</servlet-name>
+    	<url-pattern>/DatasetUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>BenchmarkDatasetUploadServlet</servlet-name>
+    	<url-pattern>/BenchmarkDatasetUploadServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>IPADatasetSearchServlet</servlet-name>
+    	<url-pattern>/IPADatasetSearchServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>IPAJavaDockerExecuteServlet</servlet-name>
+    	<url-pattern>/IPAJavaDockerExecuteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

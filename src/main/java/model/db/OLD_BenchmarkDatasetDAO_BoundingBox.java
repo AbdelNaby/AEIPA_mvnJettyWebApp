@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * @author acil
  *
  */
-public class BenchmarkDatasetDAO_BoundingBox 
+public class OLD_BenchmarkDatasetDAO_BoundingBox 
 extends GenericDAO<BenchmarkDatasetDTO_BoundingBox> {
 
 	/**
 	 * 
 	 */
-	public BenchmarkDatasetDAO_BoundingBox() {
+	public OLD_BenchmarkDatasetDAO_BoundingBox() {
 		super();
 	}
 
@@ -30,7 +30,7 @@ extends GenericDAO<BenchmarkDatasetDTO_BoundingBox> {
 	 */
 	@Override
 	protected String tableName() {
-		return "BENCHMARKDATASET_BOUNDINGBOX";
+		return "BENCHMARKDATASET_BOUNDINGBOX1";
 	}
 
 	/*
@@ -44,7 +44,6 @@ extends GenericDAO<BenchmarkDatasetDTO_BoundingBox> {
 	protected ArrayList<String> valueList(BenchmarkDatasetDTO_BoundingBox dto) {
 		// Filling in values from database row to the DTO object
 		ArrayList<String> valueList = new ArrayList<String>();
-		valueList.add(dto.getId());
 		valueList.add(dto.getUserName());
 		valueList.add(dto.getName());
 		valueList.add(dto.getDescription());
@@ -56,25 +55,24 @@ extends GenericDAO<BenchmarkDatasetDTO_BoundingBox> {
 	 * 
 	 * @see model.db.GenericDAO#convertToDTO(java.sql.ResultSet)
 	 */
-	@Override
-	protected ArrayList<BenchmarkDatasetDTO_BoundingBox> convertToDTO(ResultSet rs) {
-		ArrayList<BenchmarkDatasetDTO_BoundingBox> bBoxBenchDatasetsList = new ArrayList<BenchmarkDatasetDTO_BoundingBox>();
-		try {
-			while (rs.next()) {
-				BenchmarkDatasetDTO_BoundingBox bBoxBenchmarkDataset = new BenchmarkDatasetDTO_BoundingBox(
-						rs.getString(attributeList.get(2)));
-
-				bBoxBenchmarkDataset.setId(rs.getString(attributeList.get(0)));
-				bBoxBenchmarkDataset.setUserName(rs.getString(attributeList.get(1)));
-				bBoxBenchmarkDataset.setDescription(rs.getString(attributeList.get(3)));
-				bBoxBenchDatasetsList.add(bBoxBenchmarkDataset);
-			}
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
-		return bBoxBenchDatasetsList;
-	}
+//	@Override
+//	protected ArrayList<BenchmarkDatasetDTO_BoundingBox> convertToDTO(ResultSet rs) {
+//		ArrayList<BenchmarkDatasetDTO_BoundingBox> bBoxBenchDatasetsList = new ArrayList<BenchmarkDatasetDTO_BoundingBox>();
+//		try {
+//			while (rs.next()) {
+//				BenchmarkDatasetDTO_BoundingBox bBoxBenchmarkDataset = new BenchmarkDatasetDTO_BoundingBox(
+//						rs.getString(attributeList.get(1)));
+//
+//				bBoxBenchmarkDataset.setUserName(rs.getString(attributeList.get(0)));
+//				bBoxBenchmarkDataset.setDescription(rs.getString(attributeList.get(2)));
+//				bBoxBenchDatasetsList.add(bBoxBenchmarkDataset);
+//			}
+//		} catch (SQLException e) {
+//
+//			e.printStackTrace();
+//		}
+//		return bBoxBenchDatasetsList;
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -85,10 +83,15 @@ extends GenericDAO<BenchmarkDatasetDTO_BoundingBox> {
 	@Override
 	protected void setAttributeList() {
 		// Setting the columns names from the database to the DTO object
-		attributeList.add("ID");
-		attributeList.add("USER_NAME");
+		attributeList.add("USERNAME");
 		attributeList.add("NAME");
 		attributeList.add("DESCRIPTION");
+	}
+
+	@Override
+	protected ArrayList<BenchmarkDatasetDTO_BoundingBox> convertArrayListToArrayDTOs(ArrayList<String> arrayList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

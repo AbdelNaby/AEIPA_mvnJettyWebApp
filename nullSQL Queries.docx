@@ -1,0 +1,119 @@
+﻿Database:
+1. mysql -u root -p
+2. MySQLroot1$
+3. create database testdb;
+4. use testdb;
+5. show tables;
+6. drop table IPA2;
+6. exit
+
+use crunchify;
+create table employee (Name VARCHAR (20), Address VARCHAR (50), EmployeeCount INT (10), Website VARCHAR (50) );
+
+use testdb;
+CREATE TABLE `USER` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `first_name` varchar(45) NOT NULL,
+  `last_name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `username` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `regdate` date NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+		attributeList.add("FIRST_NAME");
+		attributeList.add("LAST_NAME");
+		attributeList.add("USERNAME");
+		attributeList.add("PASSWORD");
+		attributeList.add("EMAIL");
+		attributeList.add("DOB");
+		attributeList.add("ORGANIZATION");
+		attributeList.add("JOB");
+
+`USER_ID` int(10) unsigned NOT NULL auto_increment,
+
+
+
+use testdb;
+CREATE TABLE `USER2` (
+  `FIRST_NAME` varchar(45) NOT NULL,
+  `LAST_NAME` varchar(45) NOT NULL,
+  `USERNAME` varchar(45) NOT NULL,
+  `PASSWORD` varchar(45) NOT NULL,
+  `EMAIL` varchar(45) NOT NULL,
+  `DOB` varchar(45),
+  `ORGANIZATION` varchar(45),
+  `JOB` varchar(45),
+  PRIMARY KEY  (`USERNAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+		attributeList.add("IPA_ID");
+		attributeList.add("USER_NAME");
+		attributeList.add("NAME");
+		attributeList.add("DESCRIPTION");
+		attributeList.add("FullPath");
+		attributeList.add("Type");
+		attributeList.add("MainFileName");
+		attributeList.add("ProgLanguageName");
+		attributeList.add("ProgLanguageNum");
+use testdb;
+CREATE TABLE `IPA2` (
+  `USERNAME` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `DESCRIPTION` varchar(200) NOT NULL,
+  `FullPath` varchar(200) NOT NULL,
+  `Type` varchar(45) NOT NULL,
+  `MainFileName` varchar(45) NOT NULL,
+  `ProgLanguageName` varchar(45) NOT NULL,
+  `ProgLanguageNum` varchar(45) NOT NULL,
+   PRIMARY KEY  (`NAME`),
+FOREIGN KEY (USERNAME) REFERENCES USER2 (USERNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+		attributeList.add("ID");
+		attributeList.add("USER_NAME");
+		attributeList.add("NAME");
+		attributeList.add("DESCRIPTION");
+		attributeList.add("XYLABEL_SHEETNAME");
+use testdb;
+CREATE TABLE `DATASET2` (
+  `USERNAME` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `TYPE` varchar(45) NOT NULL,
+  `DESCRIPTION` varchar(200),
+`EVALUATIONDESCRIPTION` varchar(200),
+`FullPath` varchar(200) NOT NULL,
+`BenchmarkDatasetNAME` varchar(45),
+XYLABEL_SHEETNAME varchar(45),
+  PRIMARY KEY  (`NAME`),
+FOREIGN KEY (USERNAME) REFERENCES USER2 (USERNAME),
+FOREIGN KEY (BenchmarkDatasetNAME) REFERENCES DATASET2(NAME)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+use testdb;
+CREATE TABLE `BOUNDINGBOX_LABELED_BENCHMARKDATASET1` (
+  `USERNAME` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `DESCRIPTION` varchar(45) NOT NULL,
+  `XYLABEL_SHEETNAME` varchar(45) NOT NULL,
+  PRIMARY KEY  (`NAME`),
+FOREIGN KEY (USERNAME) REFERENCES USER1 (USERNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+		attributeList.add("USERNAME");
+		attributeList.add("NAME");
+		attributeList.add("DESCRIPTION");
+
+use testdb;
+CREATE TABLE `BENCHMARKDATASET_BOUNDINGBOX1` (
+  `USERNAME` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `DESCRIPTION` varchar(45) NOT NULL,
+  PRIMARY KEY  (`NAME`),
+FOREIGN KEY (USERNAME) REFERENCES USER1 (USERNAME)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+		attributeList.add("USERNAME");
+		attributeList.add("NAME");
+		attributeList.add("DESCRIPTION");

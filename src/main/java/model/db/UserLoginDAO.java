@@ -5,8 +5,6 @@ package model.db;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.*;
-import java.sql.*;
 
 /**
  * @author acil
@@ -17,7 +15,7 @@ public class UserLoginDAO extends GenericDAO<UserLoginDTO> {
 	@Override
 	protected String tableName() {
 		// TODO Auto-generated method stub
-		return "User";
+		return "User1";
 	}
 
 	@Override
@@ -28,16 +26,16 @@ public class UserLoginDAO extends GenericDAO<UserLoginDTO> {
 		return valueList;
 	}
 
-	@Override
-	protected ArrayList<UserLoginDTO> convertToDTO(ResultSet rs) {
-		// Doing NOTHING
-		return null;
-	}
+//	@Override
+//	protected ArrayList<UserLoginDTO> convertToDTO(ResultSet rs) {
+//		// Doing NOTHING
+//		return null;
+//	}
 
 	@Override
 	protected void setAttributeList() {
-		attributeList.add("username");
-		attributeList.add("password");
+		attributeList.add("USERNAME");
+		attributeList.add("PASSWORD");
 	}
 	/**
 	 * @return the attributeList
@@ -63,6 +61,12 @@ public class UserLoginDAO extends GenericDAO<UserLoginDTO> {
 		return false;
 	}
 	public ArrayList<String> getConditionOpList() {
+		return null;
+	}
+
+	@Override
+	protected ArrayList<UserLoginDTO> convertArrayListToArrayDTOs(ArrayList<String> arrayList) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }

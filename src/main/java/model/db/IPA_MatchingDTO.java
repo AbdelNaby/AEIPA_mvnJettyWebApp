@@ -28,7 +28,7 @@ public class IPA_MatchingDTO extends IPA_Object_RecognitionDTO {
 	 */
 	@Override
 	protected String iPA_Object_RecognitionSubType() {
-		return "Matching/";
+		return "Matching";
 	}
 
 }

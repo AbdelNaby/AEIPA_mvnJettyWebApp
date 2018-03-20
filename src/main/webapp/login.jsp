@@ -6,11 +6,16 @@
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/testdb","root", "MySQLroot1$");
     Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("select * from USER where username='" + username + "' and password='" +password + "'");
+    rs = st.executeQuery("select * from USER1 where USERNAME='" + username + "' and PASSWORD='" +password + "'");
     if (rs.next()) {
         session.setAttribute("username", username);
         response.sendRedirect("success.jsp");
     } else {
         out.println("Invalid password <a href='index.jsp'>try again</a>");
     }
+    
+
+
+
+
 %>

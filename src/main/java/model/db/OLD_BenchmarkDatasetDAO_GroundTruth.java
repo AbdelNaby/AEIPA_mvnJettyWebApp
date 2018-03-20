@@ -10,13 +10,13 @@ import java.util.ArrayList;
  * @author acil
  *
  */
-public class BenchmarkDatasetDAO_GroundTruth extends 
+public class OLD_BenchmarkDatasetDAO_GroundTruth extends 
 GenericDAO<BenchmarkDatasetDTO_GroundTruth> {
 
 	/**
 	 * 
 	 */
-	public BenchmarkDatasetDAO_GroundTruth() {
+	public OLD_BenchmarkDatasetDAO_GroundTruth() {
 		super();
 	}
 
@@ -38,7 +38,6 @@ GenericDAO<BenchmarkDatasetDTO_GroundTruth> {
 	protected ArrayList<String> valueList(BenchmarkDatasetDTO_GroundTruth dto) {
 		// Filling in values from database row to the DTO object
 		ArrayList<String> valueList = new ArrayList<String>();
-		valueList.add(dto.getId());
 		valueList.add(dto.getUserName());
 		valueList.add(dto.getName());
 		valueList.add(dto.getDescription());
@@ -48,25 +47,23 @@ GenericDAO<BenchmarkDatasetDTO_GroundTruth> {
 	/* (non-Javadoc)
 	 * @see model.db.GenericDAO#convertToDTO(java.sql.ResultSet)
 	 */
-	@Override
-	protected ArrayList<BenchmarkDatasetDTO_GroundTruth> convertToDTO(ResultSet rs) {
-		ArrayList<BenchmarkDatasetDTO_GroundTruth> gTEvalDatasetsList = new ArrayList<BenchmarkDatasetDTO_GroundTruth>() ;
-		try {
-			while (rs.next())
-			{
-				BenchmarkDatasetDTO_GroundTruth gTEvalDataset = new BenchmarkDatasetDTO_GroundTruth(rs.getString(attributeList.get(2)));
-				
-				gTEvalDataset.setId(rs.getString(attributeList.get(0)));
-				gTEvalDataset.setUserName(rs.getString(attributeList.get(1)));
-				gTEvalDataset.setDescription(rs.getString(attributeList.get(3)));
-				gTEvalDatasetsList.add(gTEvalDataset);
-			}
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-		}
-		return gTEvalDatasetsList;
-	}
+//	@Override
+//	protected ArrayList<BenchmarkDatasetDTO_GroundTruth> convertToDTO(ResultSet rs) {
+//		ArrayList<BenchmarkDatasetDTO_GroundTruth> gTEvalDatasetsList = new ArrayList<BenchmarkDatasetDTO_GroundTruth>() ;
+//		try {
+//			while (rs.next())
+//			{
+//				BenchmarkDatasetDTO_GroundTruth gTEvalDataset = new BenchmarkDatasetDTO_GroundTruth(rs.getString(attributeList.get(1)));
+//				gTEvalDataset.setUserName(rs.getString(attributeList.get(0)));
+//				gTEvalDataset.setDescription(rs.getString(attributeList.get(2)));
+//				gTEvalDatasetsList.add(gTEvalDataset);
+//			}
+//		} catch (SQLException e) {
+//			
+//			e.printStackTrace();
+//		}
+//		return gTEvalDatasetsList;
+//	}
 
 	/* (non-Javadoc)
 	 * @see model.db.GenericDAO#setAttributeList()
@@ -75,10 +72,15 @@ GenericDAO<BenchmarkDatasetDTO_GroundTruth> {
 	@Override
 	protected void setAttributeList() {
 		// Setting the columns names from the database to the DTO object
-		attributeList.add("ID");
 		attributeList.add("USER_NAME");
 		attributeList.add("NAME");
 		attributeList.add("DESCRIPTION");
 		}
+
+	@Override
+	protected ArrayList<BenchmarkDatasetDTO_GroundTruth> convertArrayListToArrayDTOs(ArrayList<String> arrayList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

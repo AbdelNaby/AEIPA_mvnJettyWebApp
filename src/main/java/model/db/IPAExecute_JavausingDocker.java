@@ -25,7 +25,7 @@ import com.spotify.docker.client.messages.HostConfig.Bind;
  * @author acil
  *
  */
-public class IPAExecute_JavausingDocker extends IPAExecute {
+public class IPAExecute_JavausingDocker extends IPADockerExecute {
 
 	/**
 	 * 
@@ -44,11 +44,11 @@ public class IPAExecute_JavausingDocker extends IPAExecute {
 			//iPA type is already known, here we should define the evaluation type 
 		}
 			
-			
-		String outputDatasetFullPath = "Output dataset full path";
+		String inputDatasetFullPath = 	inputDatasetDTO.getFullPath();
+		String outputDatasetFullPath = inputDatasetDTO.getFullPath() + "ResultDataset";
 		try 
 		{
-			createJavaContainer(iPADTO.getMainFileName(), inputDatasetDTO.getFullPath(), outputDatasetFullPath);
+			createJavaContainer(iPADTO.getFullPath(), inputDatasetFullPath, outputDatasetFullPath);
 		} catch (DockerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -62,7 +62,7 @@ public class IPAExecute_JavausingDocker extends IPAExecute {
 		return true;
 	}
 	
-	  public void createJavaContainer( String mainFileName, String inputDatasetFullPath, String outputDatasetFullPath) 
+	  public void createJavaContainer( String mainFileFullPath, String inputDatasetFullPath, String outputDatasetFullPath) 
 			  throws DockerException, InterruptedException, IOException {
 		// Getting all files in the Dataset folder
 //			File folder = new File(inputDatasetFullPath);
@@ -94,8 +94,8 @@ public class IPAExecute_JavausingDocker extends IPAExecute {
 	        		guestPath, hostPath);
 	         
 	        String[][] commands = new String[][] {	                
-	                new String[] {"javac", mainFileName + ".java"},
-	                new String[] {"java", mainFileName, inputDatasetFullPath, outputDatasetFullPath }	           
+	                new String[] {"javac", mainFileFullPath + ".java"},
+	                new String[] {"java", mainFileFullPath, inputDatasetFullPath, outputDatasetFullPath }	           
 	        } ;
 	         
 	        StringBuffer lastOutput = new StringBuffer() ;
@@ -105,8 +105,8 @@ public class IPAExecute_JavausingDocker extends IPAExecute {
 	         
 	        System.out.println( "Number of commands run successfully is " +
 	        		successCount ) ;
-	        System.out.println( "Last exit code is " + lastExitCode ) ;
-	        System.out.println( "Last output is: '" + lastOutput.toString() + "'" ) ;
+	        System.out.println( "Last exit code is " + lastExitCode );
+	        System.out.println( "Last output is: '" + lastOutput.toString() + "'" );
 	         
 	        listContainers(docker) ;
 	         
@@ -347,9 +347,8 @@ public class IPAExecute_JavausingDocker extends IPAExecute {
 	        File hostDir = new File(cwd, name ) ;
 	        if( ! hostDir.exists() ) {
 	            boolean ok = hostDir.mkdir() ;
-	            if( !ok ) throw new IOException( "Couldn't make ./" +name+ " directory" ) ;
+	            if( !ok ) throw new IOException( "Couldn't make ./" + name + " directory" ) ;
 	        }
-	         
 	        return hostDir.getCanonicalPath() ;
 	    }
 

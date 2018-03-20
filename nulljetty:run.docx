@@ -1,0 +1,21 @@
+﻿clean compile jetty:run
+
+1. run as -> Maven clean
+2. run as -> Maven install
+3. run as -> Maven build... -> jetty:run
+4. Open Browser -> http://localhost:8080/
+
+
+http://localhost:8080
+
+To Do:
+1. A Complete user Scenario
+Database tables
+Folders’ Structure
+Login Scenario
+Registration Scenario
+Add IPA
+Add Dataset
+IPA Execution
+IPA Evaluation
+IPA Reporting

@@ -1,7 +1,5 @@
 package model.db;
 
-import java.sql.Date;
-
 // Data Object
 
 // A POJO Class
