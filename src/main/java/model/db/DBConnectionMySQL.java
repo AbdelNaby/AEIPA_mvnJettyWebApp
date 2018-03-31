@@ -16,7 +16,6 @@ import com.mysql.jdbc.ResultSetMetaData;
  */
 public class DBConnectionMySQL extends DBConnection {
 	public DBConnectionMySQL() {
-
 		super();
 	}
 
@@ -130,7 +129,7 @@ public class DBConnectionMySQL extends DBConnection {
 	@Override
 	public ArrayList<String> selectDataFromDB(String tableName, String attributeValue, String conditionOp, String value) {
 		ArrayList<String> selectedData = new ArrayList<String>();
-		String queryStatement = "select * from " + tableName + " where " + attributeValue + conditionOp + " ?";
+		String queryStatement = "select * from " + tableName + " where " + attributeValue +" "+ conditionOp + " ?";
 		System.out.println(queryStatement);
 		PreparedStatement prepareStat = null;	
 		ResultSet rs = null;
@@ -141,7 +140,6 @@ public class DBConnectionMySQL extends DBConnection {
 			// execute select SQL statement
 			System.out.println("The query is: " + prepareStat.toString());
 			rs = prepareStat.executeQuery();
-			
 			System.out.println("Resultset metadata: "+ rs.getMetaData());
 			dBConn.commit();
 			//System.out.println("The FIRST_NAME ----> " + rs.getString("FIRST_NAME"));
@@ -240,8 +238,6 @@ public class DBConnectionMySQL extends DBConnection {
 				prepareStat.setString(i+1, chkValueList.get(i));
 			}
 			System.out.println("The query is: " + prepareStat.toString());
-			
-			
 			// execute select SQL statement
 			rs = prepareStat.executeQuery();
 			System.out.println("Resultset metadata: "+ rs.getMetaData());
@@ -259,7 +255,6 @@ public class DBConnectionMySQL extends DBConnection {
 				}
 			}
 			System.out.println("The resultset data are: " + selectedData.toString());
-			
 		} catch (SQLException e) {
 			System.out.println(" Data multicondition is NOT  selected successfully");
 			e.printStackTrace();

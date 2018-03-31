@@ -3,7 +3,6 @@
  */
 package model.db;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
 /**
  * @author acil
@@ -170,6 +169,7 @@ public abstract class GenericDAO <T extends GenericDTO>{
 		
 		ArrayList<String> selectedData = operationDBCon.selectDataFromDB_MultiCondition(tableName(),  
 				chkAttributeList, chkConditionOpList, chkConnectorOpList, chkValueList);
+		if(!selectedData.isEmpty()) {
 		ArrayList<T> dtoList = convertArrayListToArrayDTOs(selectedData);
 //		if(rs.equals(null))
 //		{
@@ -179,7 +179,16 @@ public abstract class GenericDAO <T extends GenericDTO>{
 //		ArrayList<T> dtoList= convertToDTO(rs);
 
 		System.out.println(" Display  in Generic DAO  successfully");
+		System.out.println("************************* GenericDAO Success *********************");
+		
 		return dtoList;
+		}
+		else
+		{
+			System.out.println("************************* GenericDAO No Data NULL*********************");
+			return null;
+			
+		}
 	}
 	
 

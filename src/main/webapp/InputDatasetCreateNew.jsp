@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Creating New Input Dataset</title>
+<title>Creating New Dataset</title>
 </head>
 <body bgcolor="#669900">
-	<form method="post" action="InputDatasetCreatNewServlet">
+	<form method="post" action="DatasetCreatNewServlet">
 		<center>
 			<table border="1" width="30%" cellpadding="5">
 				<thead>
@@ -18,9 +18,12 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td nowrap>Input Dataset Name *</td>
-						<td><input type="text" name="inputdatasetname" value=""
-							required /></td>
+						<td nowrap>Dataset Name *</td>
+						<td><input type="text" name="datasetname" value="" required /></td>
+					</tr>
+					<tr>
+						<td nowrap>Dataset Sequence Name *</td>
+						<td><input type="text" name="dataSeqsetname" value="" required /></td>
 					</tr>
 					<tr>
 						<td nowrap>Input Dataset Description</td>
@@ -31,28 +34,29 @@
 						<td>Input Dataset Evaluation Description</td>
 						<td><input type="text" name="inputdatasetevaldescr" value="" /></td>
 					</tr>
+
 					<tr>
-						<td nowrap>The corresponding Benchmark Dataset Name *</td>
-						<td><input type="text" name="benchmarkdatasetname" value=""
-							required /></td>
+						<td nowrap>Keywords</td>
+						<td><input type="text" name="Keywords" value="" /></td>
 					</tr>
 					<tr>
-						<td>Benchmark Dataset Description</td>
-						<td><input type="text" name="benchmarkdatasetdescription"
+						<td>GroundTruth Dataset Description</td>
+						<td><input type="text" name="groundTruthdatasetdescription"
 							value="" /></td>
 					</tr>
 					<tr>
-						<td nowrap>Benchmark Dataset Evaluation Description</td>
-						<td><input type="text" name="benchmarkdatasetevaldescr"
+						<td nowrap>GroundTruth Dataset Evaluation Description</td>
+						<td><input type="text" name="groundTruthdatasetevaldescr"
 							value="" /></td>
 					</tr>
+
 					<tr>
-						<td nowrap>Benchmark Dataset Type</td>
-						<td><select id="benchmarkdatasettype" name = "benchmarkdatasettype"
+						<td nowrap>GroundTruth Dataset Result Type</td>
+						<td><select id="groundTruthdatasetResultType"
+							name="groundTruthdatasetResultType"
 							onchange="enableLabelingSheet(this);">
-								<option value="GroundTruth">GroundTruth</option>
-								<option value="BoundingBox">Bounding Box</option>
-								<option value="BoundingBoxLabeled">Labeled Bounding Box</option>
+								<option value="BOUNDING_BOX">Bounding Box</option>
+								<option value="LABELLED_BOUNDING_BOX">Labeled Bounding Box</option>
 						</select></td>
 					</tr>
 					<tr>
@@ -61,25 +65,9 @@
 							name="XYLABEL_SHEETNAME" value="" disabled /></td>
 					</tr>
 
-					<script>
-						function enableLabelingSheet(that) {
-							if (that.value == "BoundingBoxLabeled") {
-								//alert("check");
-								//document.getElementById("ifYes").style.display = "block";
-								document.getElementById("XYLABEL_SHEETNAME").disabled = false;
-								document.getElementById("XYLABEL_SHEETNAME").color = "#000";
-							} else {
-								//document.getElementById("ifYes").style.display = "none";
-								document.getElementById("XYLABEL_SHEETNAME").disabled = true;
-								document.getElementById("XYLABEL_SHEETNAME").color = "#888";
-							}
-						}
-					</script>
-
-					</tr>
 					<tr>
 						<td><input type="submit" value="Submit"
-							name="Create a new Input Dataset" /></td>
+							name="Create a new Dataset" /></td>
 						<td><input type="reset" value="Reset" /></td>
 					</tr>
 					<tr>
@@ -89,5 +77,19 @@
 			</table>
 		</center>
 	</form>
+	<script>
+		function enableLabelingSheet(that) {
+			if (that.value == "BoundingBoxLabeled") {
+				//alert("check");
+				//document.getElementById("ifYes").style.display = "block";
+				document.getElementById("XYLABEL_SHEETNAME").disabled = false;
+				document.getElementById("XYLABEL_SHEETNAME").color = "#000";
+			} else {
+				//document.getElementById("ifYes").style.display = "none";
+				document.getElementById("XYLABEL_SHEETNAME").disabled = true;
+				document.getElementById("XYLABEL_SHEETNAME").color = "#888";
+			}
+		}
+	</script>
 </body>
 </html>

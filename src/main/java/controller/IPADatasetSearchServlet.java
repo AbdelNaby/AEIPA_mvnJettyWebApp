@@ -12,10 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import javassist.bytecode.Descriptor.Iterator;
-import model.db.IPADTO;
-import model.db.IPAService;
-import model.db.IPA_Edge_DetectionDTO;
-import model.db.IPA_MatchingDTO;
+import model.db.*;
 
 /**
  * Servlet implementation class IPADatasetSearchServlet
@@ -45,62 +42,73 @@ public class IPADatasetSearchServlet extends HttpServlet {
 		IPAService iPAService = new IPAService();
 		PrintWriter writer = response.getWriter();
 		if (!ipatype.isEmpty() && !username.isEmpty()) {
-			if (ipatype.equalsIgnoreCase("Matching")) {
-				iPADTOList = iPAService.retrieveInfobyType("Matching");
+			if (!(ipatype.equalsIgnoreCase("Matching") || ipatype.equalsIgnoreCase("Edge_Detection"))) {
+				System.out.println("The IPA Types doesn't match the ones in the IPA DAOs");
 			} else {
-				if (ipatype.equalsIgnoreCase("Edge_Detection")) {
-					iPADTOList = iPAService.retrieveInfobyType("Edge_Detection");
-				}
+				iPADTOList = iPAService.retrieveInfobyType(ipatype);
 			}
+
 			ArrayList<String> iPAArrayList = new ArrayList<String>();
 			for (int i = 0; i < iPADTOList.size(); i++) {
 				iPAArrayList.add(iPAService.dTOMapper(iPADTOList.get(i)).toString());
 			}
 			System.out.println("Here is the retrievedIPA List: " + iPAArrayList);
-//			for (int i = 0; i < iPAArrayList.size(); i++) {
-//				session.setAttribute("iPAName", iPAArrayList.get(i++));
-//			}
-			//List<IPADTO> listiPA = iPADTOList;
 			session.setAttribute("listiPA", iPADTOList);
-//			session.setAttribute("IPAListSize", iPAArrayList.size());
-			// System.out.println("<table>");
-			// ArrayList dataList = new ArrayList();
-			// // add some data in it....
-			//// for (Iterator iter = iPAArrayList.iterator(); iter.hasNext();) {
-			//// System.out.println("<tr><td>" + (String)(iPAArrayList.next()) +
-			// "</td></tr>");
-			//// }
-			// for (int i=0; i< iPAArrayList.size(); i++)
-			// {
-			// System.out.println("<tr><td>" + iPAArrayList.get(i).toString() +
-			// "</td></tr>");
-			// }
-			// System.out.println("</table>");
-			response.sendRedirect("IPADatasetSearchResults.jsp");
+
 		} else {
 			writer.println("Please Enter Valid Type and username, IPA is not retrieved successfully");
 		}
-	}
+		// 2. Retrieve the Datasets
+		String datasetType = request.getParameter("datasetType");
+		ArrayList<DatasetContainerDTO> datasetContainerDTOList = new ArrayList<DatasetContainerDTO>();
+		DatasetService datasetService = new DatasetService();
+		if (!datasetType.isEmpty() && !username.isEmpty()) {
+			datasetContainerDTOList = datasetService.retrieveDatasetbyResultType(datasetType);
+			ArrayList<DatasetDTO> inputDatasetDTOList = new ArrayList<DatasetDTO>();
 
+			for (int i = 0; i < datasetContainerDTOList.size(); i++) {
+				inputDatasetDTOList.addAll(datasetContainerDTOList.get(i).getInputSequenceDatasetDTOList());
+			}
+
+			// // Retrieving only the input datasets associated with benchmarkdatasets with
+			// the selected type
+			// for(int i=0; i< datasetContainerDTOList.size(); i++)
+			// {
+			// ArrayList<DatasetDTO> inputDatasetDTOListTemp = new ArrayList<DatasetDTO>();
+			// inputDatasetDTOListTemp =
+			// datasetService.retrieveInfobyResultType(benchmarkDatasetDTOList.get(i).getResultType());
+			// for(int k=0; k< inputDatasetDTOListTemp.size(); k++)
+			// {
+			// inputDatasetDTOList.add(inputDatasetDTOListTemp.get(k));
+			// }
+			// }
+			session.setAttribute("inputDatasetDTOList", inputDatasetDTOList);
+			
+			response.sendRedirect("IPADatasetSearchResults.jsp");
+		} else {
+			writer.println("Please Enter Valid Type and username, Dataset is not retrieved successfully");
+		}
+	}
 }
 
 //
 //
 //
-//<%  
-//// retrieve your list from the request, with casting 
-//ArrayList<IPADTO> list = (ArrayList<IPADTO>) request.getAttribute("currentIPAList");
+// <%
+//// retrieve your list from the request, with casting
+// ArrayList<IPADTO> list = (ArrayList<IPADTO>)
+// request.getAttribute("currentIPAList");
 //
 //// print the information about every category of the list
-//for(IPADTO iPADTO : list) {
-//    out.println(iPADTO.getName());
-//    out.println(iPADTO.getDescription());
-//    out.println(iPADTO.getType());
-//    out.println(iPADTO.getMainFileName());
-//    out.println(iPADTO.getProgLanguageName());
-//    out.println(iPADTO.getProgLanguageNum());
-//    out.println(iPADTO.getUserName());
-//}
-//  
+// for(IPADTO iPADTO : list) {
+// out.println(iPADTO.getName());
+// out.println(iPADTO.getDescription());
+// out.println(iPADTO.getType());
+// out.println(iPADTO.getMainFileName());
+// out.println(iPADTO.getProgLanguageName());
+// out.println(iPADTO.getProgLanguageNum());
+// out.println(iPADTO.getUserName());
+// }
 //
-//%>
+//
+// %>

@@ -18,15 +18,15 @@ import model.db.DatasetDTO;
 import model.db.DatasetService;
 
 /**
- * Servlet implementation class BenchmarkDatasetUploadServlet
+ * Servlet implementation class GroundTruthDatasetUploadServlet
  */
-public class BenchmarkDatasetUploadServlet extends HttpServlet {
+public class GroundTruthDatasetUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BenchmarkDatasetUploadServlet() {
+    public GroundTruthDatasetUploadServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,16 +35,15 @@ public class BenchmarkDatasetUploadServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
 		HttpSession session = request.getSession();
 		// String uploadedIPAFilePath = (String) session.getAttribute("fullPath");
-		DatasetDTO benchmarkDataset = (DatasetDTO) session.getAttribute("benchmarkDataset");
-		System.out.println("Dataset to be uploaded to: " + benchmarkDataset.getFullPath());
+		DatasetDTO currentDataset = (DatasetDTO) session.getAttribute("groundTruth");
+		System.out.println("Dataset to be uploaded to: " + currentDataset.getFullPath());
 		DatasetService datasetService = new DatasetService();
 		try {
 			List<FileItem> multifiles = sf.parseRequest(request);
-			datasetService.uploadFiles(multifiles, benchmarkDataset);
+			datasetService.uploadFiles(multifiles, currentDataset);
 			// PrintWriter writer = response.getWriter();
 			response.sendRedirect("home.jsp");
 		} catch (FileUploadException e) {

@@ -30,10 +30,10 @@
 					</td>
 				</tr>
 				<tr>
-									<td>
+					<td>
 						<form name="f3" method="post" action="IPAUpdateInfo.jsp">
-							<input id="IPAExecute" type="submit" name="Update IPA Information"
-								value="Update IPA Information">
+							<input id="IPAExecute" type="submit"
+								name="Update IPA Information" value="Update IPA Information">
 						</form>
 					</td>
 					<td>
@@ -43,7 +43,6 @@
 								value="Update Dataset Information">
 						</form>
 					</td>
-
 				<tr>
 					<td>
 						<form name="f5" method="post" action="IPADelete.jsp">
@@ -51,40 +50,39 @@
 								value="Delete IPA">
 						</form>
 					</td>
-				<td>
-					<form name="f6" method="post" action="DatasetDelete.jsp">
-						<input id="DatasetDelete" type="submit" name="Delete Dataset"
-							value="Delete Dataset">
-					</form>
-				</td>
+					<td>
+						<form name="f6" method="post" action="DatasetDelete.jsp">
+							<input id="DatasetDelete" type="submit" name="Delete Dataset"
+								value="Delete Dataset">
+						</form>
+					</td>
 				</tr>
-								<tr>
+				<tr>
 					<td>
 						<form name="f7" method="post" action="IPADatasetSearch.jsp">
 							<input id="IPAExecute" type="submit" name="Execute IPA"
 								value="Execute IPA">
 						</form>
 					</td>
-				<td>
-					<form name="f8" method="post" action="IPAExecute.jsp">
-						<input id="IPAExecute" type="submit" name="Execute IPA"
-							value="Execute IPA">
-					</form>
-				</td>
+					<td>
+						<form name="f8" method="post" action="IPAExecute.jsp">
+							<input id="IPAExecute" type="submit" name="Execute IPA"
+								value="Execute IPA">
+						</form>
+					</td>
 				</tr>
 				<tr>
-					<td>
+					<td colspan="2">
 						<%
 							if ((session.getAttribute("username") == null) || (session.getAttribute("username") == "")) {
 						%> You are not logged in <br /> <a href="index.jsp">Please
 							Login</a> <%
- 	} else {
- %> Welcome <%=session.getAttribute("username")%> To <a
-						href='logout.jsp'>Logout</a> <%
- 	}
- %>
-					</td>
-					<td><input type="reset" value="Reset" /></td>
+						 	} else {
+						 %> Welcome <%=session.getAttribute("username")%> To <a
+												href='logout.jsp'>Logout</a> <%
+						 	}
+						 %>
+					
 				</tr>
 				<tr>
 					<td colspan="2">New User: <a href="register.jsp">Register

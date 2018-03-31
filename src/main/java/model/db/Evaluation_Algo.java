@@ -3,13 +3,12 @@
  */
 package model.db;
 
-import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * @author acil
  *
  */
 public interface Evaluation_Algo {
-	boolean evaluate(BenchmarkDatasetDTO benchmarkDatasetDTO,
-			DatasetResultDTO resultDatasetDTO) throws IOException;
+	public ArrayList<Double> evaluate(String resultImgFullPath, String groundTruthImgFullPath);
 }

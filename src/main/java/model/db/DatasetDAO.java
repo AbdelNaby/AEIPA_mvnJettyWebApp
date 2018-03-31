@@ -26,7 +26,7 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 	@Override
 	protected String tableName() {
 		// TODO Auto-generated method stub
-		return "DATASET2";
+		return "DATASET3";
 	}
 
 	/*
@@ -35,6 +35,7 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 	 * @see model.db.GenericDAO#valueList(model.db.GenericDTO) Filling in values in
 	 * database row from the DTO object
 	 */
+
 	@Override
 	protected ArrayList<String> valueList(DatasetDTO dto) {
 		// Filling in values to database row from the DTO object
@@ -45,9 +46,11 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 		valueList.add(dto.getType());
 		valueList.add(dto.getDescription());
 		valueList.add(dto.getEvaluationDescription());
+		valueList.add(dto.getKeyWords());
 		valueList.add(dto.getFullPath());
-		valueList.add(dto.getBenchmarkDatasetNAME());
+		valueList.add(dto.getResultType().toString());
 		valueList.add(dto.getxYLabelSheetName());
+		valueList.add(dto.getDatasetName());
 		return valueList;
 	}
 
@@ -65,65 +68,57 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 		int i = 0;
 		while (arrayList.size() > i) {
 			DatasetDTO datasetDTO = null;
-			if (arrayList.get(2).equals("GroundTruth")) {
-				datasetDTO = new BenchmarkDatasetDTO_GroundTruth();
+			if (arrayList.get(2).equals("RESULT")) {
+				datasetDTO = new ResultDTO();
 			} else {
-				if (arrayList.get(2).equals("BoundingBox")) {
-					datasetDTO = new BenchmarkDatasetDTO_BoundingBox();
+				if (arrayList.get(2).equals("GROUNDTRUTH")) {
+					datasetDTO = new GroundTruthDTO(arrayList.get(i+1),arrayList.get(i+9), arrayList.get(i+0));
 				} else {
-					if (arrayList.get(2).equals("BoundingBoxLabeled")) {
-						datasetDTO = new BenchmarkDatasetDTO_BoundingBoxLabeled();
-					} else {
-						datasetDTO = new InputDatasetDTO();
-						if (arrayList.get(2).equals("DatasetResult")) {
-							datasetDTO = new DatasetResultDTO();
-						} else {
-							datasetDTO = new InputDatasetDTO(arrayList.get(1), arrayList.get(6));
-						}
-					}
+					datasetDTO = new InputDTO(arrayList.get(i+1),arrayList.get(i+9), arrayList.get(i+0));
 				}
 			}
-			System.out.println("printing the arraylist in DatasetDAO.convertAray " + arrayList + i);
-			datasetDTO.setUserName(arrayList.get(i++));
-			datasetDTO.setName(arrayList.get(i++));
+			System.out.println("printing the arraylist in DatasetDAO.convertArray " + arrayList + i);
+			datasetDTO.setUserName(arrayList.get(i+0));
+			datasetDTO.setName(arrayList.get(i+1));
 			// Type is auto generated
 			// Type is set automatically when the object is created
-			i++;
+			
 			datasetDTO.setType();
 			
-			datasetDTO.setDescription(arrayList.get(i++));
-			datasetDTO.setEvaluationDescription(arrayList.get(i++));
-			
+			datasetDTO.setDescription(arrayList.get(i+3));
+			datasetDTO.setEvaluationDescription(arrayList.get(i+4));
+			datasetDTO.setKeyWords(arrayList.get(i+5));
+			datasetDTO.setResultType(arrayList.get(i+6));
+			// We have to set the full path in the end of filling all data so the datasetName will be retrieved
+			datasetDTO.setxYLabelSheetName(arrayList.get(i+8));
+			datasetDTO.setDatasetName(arrayList.get(i+9));
 			// Full path is generated automatically, there is no need to set it
-			i++;
 			datasetDTO.setFullPath();
-			// BenchmarkDatasetNAME is already filled in the InputDatasetDTO(arrayList.get(1), arrayList.get(6))
-			// No need for it here anymore
-			i++;
-			datasetDTO.setxYLabelSheetName(arrayList.get(i++));
 			datasetDTOList.add(datasetDTO);
+			i+=10;
 		}
 		return datasetDTOList;
 	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see model.db.GenericDAO#setAttributeList()
-	 * Setting the columns names from
+	 * @see model.db.GenericDAO#setAttributeList() Setting the columns names from
 	 * the database to the DTO object
 	 */
 	@Override
 	protected void setAttributeList() {
-		// Setting the columns names from the database to the attributeList inside the DTO
+		// Setting the columns names from the database to the attributeList inside the
+		// DTO
 		// attributeList.add("ID");
 		attributeList.add("USERNAME");
 		attributeList.add("NAME");
 		attributeList.add("TYPE");
 		attributeList.add("DESCRIPTION");
 		attributeList.add("EVALUATIONDESCRIPTION");
+		attributeList.add("KEYWORDS");
 		attributeList.add("FullPath");
-		attributeList.add("BenchmarkDatasetNAME");
+		attributeList.add("RESULT_TYPE");
 		attributeList.add("XYLABEL_SHEETNAME");
+		attributeList.add("DATASETNAME");
 	}
 }

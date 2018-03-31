@@ -10,6 +10,7 @@ public class ImgDiffPercentAlgorithm {
         // BinaryResults/test.jpg
         // ColoredPhotoes/img1.png
 	// BenchmarkImages/test.jpg
+	// true positive rate 
         BufferedImage img1 = ImageIO.read(new File(args[0]));
         BufferedImage img2 = ImageIO.read(new File(args[1]));
  
@@ -17,6 +18,11 @@ public class ImgDiffPercentAlgorithm {
 
 // Reporting section
 	DecimalFormat df = new DecimalFormat("00.00"); // Changing format here.
+	double TPR = p;
+	double FPR = 100 - p;
+	System.out.println("TPR: " + TPR+ " %");
+	System.out.println("FPR: " + FPR+ " %");
+
 	System.out.println("Diff percent: " + df.format(p)+ " %");
 
 

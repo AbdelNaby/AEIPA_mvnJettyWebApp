@@ -11,34 +11,40 @@ import java.util.ArrayList;
  */
 
 public abstract class FolderDTO extends GenericDTO {
-	public String userName;
-	public String name;
-	private ArrayList<String> filesNameList = new ArrayList<String>();
-	public String 	type;
-	private String defaultPath;
-	private String fullPath;
-	public String description;
+	protected String userName;
+	protected String name;
+	protected ArrayList<String> filesNameList = new ArrayList<String>();
+	protected String 	type;
+	protected String defaultPath;
+	protected String fullPath;
+	protected String description;
 
-	FolderDTO()
+	protected FolderDTO()
 	{
 		// Just for enabling creating objects without any mandatory parameters
-		setDefaultPath();
-		setType();
-		setFullPath();
+		init();
 	}
-	FolderDTO(String folderName)
+	public FolderDTO(String folderName)
 	{
 		//Dataset/IPA/EvaluationDatase/Resultset/Report
 		//Basic folder path is static, only the folder name and files type are needed
-		setDefaultPath();
-		setName(folderName);
-		setType();
+		
+		this.setName(folderName);
+		init();
+	}
+	/**
+	 * This method is for initializing the DefaultPath, Type, and FullPath
+	 */
+	protected void init()
+	{
+		this.setDefaultPath();
+		this.setType();
 		this.setFullPath();
 	}
 	/**
 	 * @return the defaultPath
 	 */
-	private String getDefaultPath() {
+	protected String getDefaultPath() {
 		return defaultPath;
 	}
 	/**
@@ -74,7 +80,7 @@ public abstract class FolderDTO extends GenericDTO {
 	/**
 	 * @param name the name to set
 	 */
-	public void setName(String name) {
+	protected void setName(String name) {
 		this.name = name;
 	}
 	/**
@@ -86,7 +92,7 @@ public abstract class FolderDTO extends GenericDTO {
 	/**
 	 * @param fullPath the fullPath to set
 	 */
-	protected void setFullPath() {
+	public void setFullPath() {
 		this.fullPath = defaultPath + type +"/" + name +"/";
 		System.out.println("The fullPath is : " + fullPath);
 	}
@@ -130,17 +136,52 @@ public abstract class FolderDTO extends GenericDTO {
 //	public void setFileNameList(String fileNames) {
 //		this.fileNameList = fileNames;
 //	}
+//	/**
+//	 * @return the filesNameList
+//	 */
+//	public ArrayList<String> getFilesNameList() {
+//		File folder = new File(fullPath);
+//		File[] listOfFiles = folder.listFiles();
+//		ArrayList<String> fillesList = new ArrayList<String>();
+//		    for (int i = 0; i < listOfFiles.length; i++) {
+//		      if (listOfFiles[i].isFile()) {
+//		        System.out.println("List of Files: File: " + listOfFiles[i].getName());
+//		        fillesList.add(listOfFiles[i].getName());
+//		      } else if (listOfFiles[i].isDirectory()) {
+//		        System.out.println("There are directories inside the folder: Directory: " + listOfFiles[i].getName());
+//		      }
+//		    }
+//		return fillesList;
+//	}
+//	/**
+//	 * @return the foldersNameList
+//	 */
+//	public ArrayList<String> getFoldersNameList() {
+//		File folder = new File(fullPath);
+//		File[] listOfFolders = folder.listFiles();
+//		ArrayList<String> foldersList = new ArrayList<String>();
+//		    for (int i = 0; i < listOfFolders.length; i++) {
+//		      if (listOfFolders[i].isFile()) {
+//		        System.out.println("List of Files: File: " + listOfFolders[i].getName());
+//		      } else if (listOfFolders[i].isDirectory()) {
+//		        System.out.println("There are directories inside the folder: Directory: " + listOfFolders[i].getName());
+//		        foldersList.add(listOfFolders[i].getName());
+//		      }
+//		    }
+//		return foldersList;
+//	}
 	/**
-	 * @return the filesNameList
+	 * @param filesNameList the filesNameList to set
 	 */
-	public ArrayList<String> getFilesNameList() {
-		return filesNameList;
+	public void addtoFilesNameList(String newFileNametobeAdded) {
+		this.filesNameList.add(newFileNametobeAdded);
 	}
 	/**
 	 * @param filesNameList the filesNameList to set
 	 */
-	public void setFilesNameList(String newFileNametobeAdded) {
-		this.filesNameList.add(newFileNametobeAdded);
+	public void setFilesNameList(ArrayList<String> filesNameList) {
+		this.filesNameList = filesNameList;
 	}
+
 
 }

@@ -5,6 +5,8 @@ package model.db;
 
 import java.util.ArrayList;
 
+
+
 /**
  * @author acil
  *
@@ -195,7 +197,7 @@ public class IPAService extends FolderService<IPADTO> {
 	}
 
 	@Override
-	public ArrayList<IPADTO> retrieveInfobyName(String name) {
+	public IPADTO retrieveInfobyName(String name) {
 		IPADAO iPADAO = new IPADAO();
 		// Checking the new IPA Name
 		System.out.println("This is from retrieveInfo for IPAName: " + name);
@@ -207,12 +209,20 @@ public class IPAService extends FolderService<IPADTO> {
 			return null;
 		}
 		System.out.println("IPA Name: " + name + " has  been found in the database succesfully..");
-		return iPA;
+		return iPA.get(0);
 	}
 
-	public boolean executeIPA(IPADTO iPADTO, InputDatasetDTO inputDatasetDTO) {
-		IPAExecute_JavausingDocker iPAExecute_JavausingDocker = new IPAExecute_JavausingDocker();
-		if(iPAExecute_JavausingDocker.executeIPA(iPADTO, inputDatasetDTO))
+	public boolean executeIPA(IPADTO iPADTO, DatasetContainerDTO datasetContainerDTO, String userName) {
+		
+		System.out.println("Inside ... executeIPA");
+		// creating a new benchmark results out of the IPAName and InputDatasetName
+		//String resultFolder = inputDatasetDTO.benchmarkDataset.addToResultDatasetList(iPADTO);
+//		if (resultFolder.equals(null))
+//		{
+//			System.out.println("## benchmarkResultFolder has NOT been created..." + resultFolder);
+//		}
+		IPADockerExecute_Java iPADockerExecute_Java = new IPADockerExecute_Java();
+		if(iPADockerExecute_Java.executeIPA(iPADTO, datasetContainerDTO, userName))
 		{
 			System.out.println(" Congrats,,, IPA has been executed successfully ....");
 			return true;

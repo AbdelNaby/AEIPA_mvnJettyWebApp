@@ -8,8 +8,8 @@ import javax.imageio.ImageIO;
 
 /**
  * @author acil
- * Input image full path: ColoredPhotoes/img1.png
- * Output image full path: BinaryResults/test.jpg
+ * Input0: the input image full path: ColoredPhotoes/img1.png
+ * Input1: Output image full path: BinaryResults/test.jpg  OR  BinaryResults/test
  */
 
 public class Main {
@@ -84,8 +84,11 @@ public class Main {
 		System.out.println( "***** Hello4" ) ;
 
 		// Output image full path: BinaryResults/test.jpg
-			ImageIO.write(binarized, "jpg", new File(args[1]));
+			ImageIO.write(binarized, "png", new File(args[1]));
+
+			System.out.println( "The input image has been binarized successfully ..." ) ;
 		} catch (IOException e) {
+			System.out.println( "Exception occured,, The input image has NOT been binarized ..." ) ;
 			e.printStackTrace();
 		}
 	}

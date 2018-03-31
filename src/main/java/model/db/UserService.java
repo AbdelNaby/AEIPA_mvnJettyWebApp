@@ -138,19 +138,4 @@ public class UserService extends GenericService<UserDTO>{
 		}
 		return true;
 	}
-
-
-	@Override
-	public ArrayList<UserDTO> retrieveInfobyName(String name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<UserDTO> retrieveInfobyType(String type) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 }

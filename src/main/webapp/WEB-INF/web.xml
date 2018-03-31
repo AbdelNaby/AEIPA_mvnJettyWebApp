@@ -50,9 +50,9 @@
     <servlet>
     	<description>
     	</description>
-    	<display-name>InputDatasetCreatNewServlet</display-name>
-    	<servlet-name>InputDatasetCreatNewServlet</servlet-name>
-    	<servlet-class>controller.InputDatasetCreatNewServlet</servlet-class>
+    	<display-name>OLD_InputDatasetCreatNewServlet</display-name>
+    	<servlet-name>OLD_InputDatasetCreatNewServlet</servlet-name>
+    	<servlet-class>controller.OLD_InputDatasetCreatNewServlet</servlet-class>
     </servlet>
     <servlet>
     	<description>
@@ -64,9 +64,9 @@
     <servlet>
     	<description>
     	</description>
-    	<display-name>BenchmarkDatasetUploadServlet</display-name>
-    	<servlet-name>BenchmarkDatasetUploadServlet</servlet-name>
-    	<servlet-class>controller.BenchmarkDatasetUploadServlet</servlet-class>
+    	<display-name>OLD_BenchmarkDatasetUploadServlet</display-name>
+    	<servlet-name>OLD_BenchmarkDatasetUploadServlet</servlet-name>
+    	<servlet-class>controller.OLD_BenchmarkDatasetUploadServlet</servlet-class>
     </servlet>
     <servlet>
     	<description>
@@ -82,6 +82,20 @@
     	<display-name>IPAJavaDockerExecuteServlet</display-name>
     	<servlet-name>IPAJavaDockerExecuteServlet</servlet-name>
     	<servlet-class>controller.IPAJavaDockerExecuteServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>DatasetCreatNewServlet</display-name>
+    	<servlet-name>DatasetCreatNewServlet</servlet-name>
+    	<servlet-class>controller.DatasetCreatNewServlet</servlet-class>
+    </servlet>
+    <servlet>
+    	<description>
+    	</description>
+    	<display-name>GroundTruthDatasetUploadServlet</display-name>
+    	<servlet-name>GroundTruthDatasetUploadServlet</servlet-name>
+    	<servlet-class>controller.GroundTruthDatasetUploadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
     	<servlet-name>IPASupplierServlet</servlet-name>
@@ -110,16 +124,16 @@
     	<url-pattern>/IPAUploadServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>InputDatasetCreatNewServlet</servlet-name>
-    	<url-pattern>/InputDatasetCreatNewServlet</url-pattern>
+    	<servlet-name>OLD_InputDatasetCreatNewServlet</servlet-name>
+    	<url-pattern>/OLD_InputDatasetCreatNewServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>DatasetUploadServlet</servlet-name>
     	<url-pattern>/DatasetUploadServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-    	<servlet-name>BenchmarkDatasetUploadServlet</servlet-name>
-    	<url-pattern>/BenchmarkDatasetUploadServlet</url-pattern>
+    	<servlet-name>OLD_BenchmarkDatasetUploadServlet</servlet-name>
+    	<url-pattern>/OLD_BenchmarkDatasetUploadServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
     	<servlet-name>IPADatasetSearchServlet</servlet-name>
@@ -128,6 +142,14 @@
     <servlet-mapping>
     	<servlet-name>IPAJavaDockerExecuteServlet</servlet-name>
     	<url-pattern>/IPAJavaDockerExecuteServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>DatasetCreatNewServlet</servlet-name>
+    	<url-pattern>/DatasetCreatNewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+    	<servlet-name>GroundTruthDatasetUploadServlet</servlet-name>
+    	<url-pattern>/GroundTruthDatasetUploadServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

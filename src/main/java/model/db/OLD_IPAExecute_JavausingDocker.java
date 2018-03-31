@@ -5,9 +5,11 @@ package model.db;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.spotify.docker.client.DefaultDockerClient;
 import com.spotify.docker.client.DockerClient;
 import com.spotify.docker.client.LogStream;
 import com.spotify.docker.client.DockerClient.ExecCreateParam;
@@ -24,19 +26,179 @@ import com.spotify.docker.client.messages.HostConfig.Bind;
  * @author acil
  *
  */
-public abstract class IPADockerExecute extends IPAExecute {
+public class OLD_IPAExecute_JavausingDocker {// extends IPADockerExecute {
 
+	/**
+	 * 
+	 */
+	public OLD_IPAExecute_JavausingDocker() {
+		// TODO Auto-generated constructor stub
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see model.db.IPAExecute#executeIPA(model.db.IPADTO,
+	 * model.db.InputDatasetDTO)
+	 */
+	//@Override
+	public boolean executeIPA(IPADTO iPADTO, InputDTO inputDatasetDTO, String resultFolder) {
+		if (iPADTO.getType() == "Detection") {
+			// iPA type is known now, here we should define the evaluation type
+		}
+
+		// String inputDatasetFullPath = inputDatasetDTO.getFullPath();
+		// String outputDatasetFullPath = iPADTO.getFullPath() +"/"+ "ResultDataset"
+		// +"/"+ inputDatasetDTO.getName();
+
+		// String resultFolder = iPADTO.getFullPath() + "IMAGETEST";
+
+		try {
+			createJavaContainer(iPADTO, inputDatasetDTO, resultFolder);
+		} catch (DockerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+	}
+
+	public void createJavaContainer(IPADTO iPADTO, InputDTO inputDatasetDTO, String resultFolder)
+			throws DockerException, InterruptedException, IOException {
+//		// Getting all files in the Dataset folder
+//		// File folder = new File(inputDatasetFullPath);
+//		// File[] listOfFiles = folder.listFiles();
+//		//
+//		// for (int i = 0; i < listOfFiles.length; i++)
+//		// {
+//		// if (listOfFiles[i].isFile())
+//		// {
+//		// File currentImage = listOfFiles[i];
+//		// System.out.println("Image : " + currentImage.getName());
+//		// }
+//		// }
+//		//Evaluation_Algo evaluation_Algo = new Evaluation_Algo_ImgDiffPercent();
+//		String mainFileFullPath = iPADTO.getFullPath() + iPADTO.getMainFileName();
+//		System.out.println("Hello from create DockerClient");
+//		DockerClient docker = new DefaultDockerClient("unix:///var/run/docker.sock");
 //
-//	@Override
-//	public boolean executeIPA(IPADTO iPADTO, InputDTO inputDTO, String benchmarkResultFolder) {
-//		// TODO Auto-generated method stub
-//		return false;
-//	}
+//		System.out.println("Pinging");
+//		String pingResult = docker.ping();
+//		System.out.println("Ping result " + pingResult);
+//
+//		String imageName = "dc1:8";
+//		// Testing *********************************************************************
+//
+//		// String defaultPath = "/home/acil/eclipse-workspace/UploadedFiles/";
+//		// String guestPath = defaultPath;
+//		// String iPAHostPath = getHostPath(defaultPath);
+//		// Testing *********************************************************************
+//		// Guestpath is the path in the docker container
+//		String iPAGuestPath = iPADTO.getFullPath();
+//		String inputDatasetGuestPath = inputDatasetDTO.getFullPath();
+//		String resultGuestPath = resultFolder;
+//		// Host is my machine and the path from IPADTO.getFullPath()
+//		String iPAHostPath = getHostPath(iPADTO.getFullPath());
+//		String inputDatasetHostPath = getHostPath(inputDatasetDTO.getFullPath());
+//		String resultHostPath = getHostPath(resultFolder);
+//
+//		System.out.println("Working directory is " + iPAHostPath + " on the host system.");
+//
+//		String containerId = startContainer(docker, imageName, iPAGuestPath, iPAHostPath, inputDatasetGuestPath,
+//				inputDatasetHostPath, resultGuestPath, resultHostPath);
+//		ArrayList<String> inputDatasetFiles = inputDatasetDTO.get.getFilesNameList();
+//
+//		// No need for the separator anymore
+//		// String separator = ""; // separator here is your ","
+//		// String allDatasetFilesAarguments = new String();
+//		// for (String s : allDatasetFiles)
+//		// {
+//		// allDatasetFilesAarguments += separator + s;
+//		// separator = " ";
+//		// }
+//		// 1. Java command
+//		// 2. MainFileName
+//		// 3. Input images arguments
+//		// 4. Output images path
+//		// String javaWithArgument[] = new String[inputDatasetFiles.size() + 2];
+//		// javaWithArgument[0] = "java";
+//		// javaWithArgument[1] = iPADTO.getMainFileName();
+//		// // Providing the input files as Java arguments as whole
+//		// for (int i = 0; i < inputDatasetFiles.size() -1; i++) {
+//		// System.out.println("$$$$$$$**** ");
+//		// System.out.println("$$$$$$$**** ");
+//		// System.out.println("$$$$$$$**** " + inputDatasetDTO.getFullPath());
+//		// javaWithArgument[i + 2] = inputDatasetDTO.getFullPath() +
+//		// inputDatasetFiles.get(i);
+//		// }
+//		// javaWithArgument[javaWithArgument.length - 1] = resultFolder;
+//
+//		// Providing the input files as Java arguments as whole
+//		for (int i = 0; i < inputDatasetFiles.size() - 1; i++) {
+//			System.out.println("$$$$$$$**** ");
+//			System.out.println("$$$$$$$**** ");
+//			System.out.println("$$$$$$$**** " + inputDatasetDTO.getFullPath());
+//			// javaWithArgument[i + 2] = inputDatasetDTO.getFullPath() +
+//			// inputDatasetFiles.get(i);
+//
+//			System.out.println(
+//					"****####### resultFolder file*** to be created" + resultFolder + inputDatasetFiles.get(i));
+//
+//			// System.out.println("**** javaWithArgument are: " + javaWithArgument);
+//			String[][] commands = new String[][] { new String[] { "ls", "-l" },
+//					new String[] { "javac", mainFileFullPath + ".java" },
+//					new String[] { "java", iPADTO.getMainFileName(),
+//							inputDatasetDTO.getFullPath() + inputDatasetFiles.get(i),
+//							resultFolder + inputDatasetFiles.get(i) }
+//					// allDatasetFilesAarguments},
+//					// new String[] {"java", iPADTO.getMainFileName() , "TestooOoo"},
+//					, new String[] { "ls", "-l" } };
+//
+//			StringBuffer lastOutput = new StringBuffer();
+//			AtomicInteger successCount = new AtomicInteger(0);
+//			int lastExitCode = runCommands(docker, containerId, commands, lastOutput, successCount);
+//
+//			System.out.println("Number of commands run successfully is " + successCount);
+//			System.out.println("Last exit code is " + lastExitCode);
+//			System.out.println("Last output is: '" + lastOutput.toString() + "'");
+//			System.out.println("****resultFolder + inputDatasetFiles.get(i)*** has been created" + resultFolder
+//					+ inputDatasetFiles.get(i));
+//
+//		}
+//		// javaWithArgument[javaWithArgument.length - 1] = resultFolder;
+//
+//		// System.out.println("**** allDatasetFilesAarguments are: "+
+//		// allDatasetFilesAarguments);
+//		// System.out.println("**** javaWithArgument are: " + javaWithArgument);
+//		// String[][] commands = new String[][] { new String[] { "ls", "-l" },
+//		// new String[] { "javac", mainFileFullPath + ".java" },
+//		// // new String[] {"java", iPADTO.getMainFileName() + " " +
+//		// // allDatasetFilesAarguments},
+//		// // new String[] {"java", iPADTO.getMainFileName() , "TestooOoo"},
+//		// javaWithArgument, new String[] { "ls", "-l" } };
+//		// StringBuffer lastOutput = new StringBuffer();
+//		// AtomicInteger successCount = new AtomicInteger(0);
+//		// int lastExitCode = runCommands(docker, containerId, commands, lastOutput,
+//		// successCount);
+//		//
+//		// System.out.println("Number of commands run successfully is " + successCount);
+//		// System.out.println("Last exit code is " + lastExitCode);
+//		// System.out.println("Last output is: '" + lastOutput.toString() + "'");
+//
+//		listContainers(docker);
+//
+//		docker.stopContainer(containerId, 5);
+//		System.out.println("Stopped container " + containerId);
+//
+//		listContainers(docker);
 
-// Add Docker Info here!
-	
-	
+		System.out.println("Bye");
+	}
 
 	/**
 	 * Start a Docker container. The directory at hostPath mapped on the host
@@ -58,7 +220,7 @@ public abstract class IPADockerExecute extends IPAExecute {
 	 * 
 	 * @param docker
 	 *            -- A docker client.
-	 * @param dockerImageName
+	 * @param imageName
 	 *            -- The name of an image.
 	 * @param iPAGuestPath
 	 * @param iPAHostPath
@@ -68,11 +230,12 @@ public abstract class IPADockerExecute extends IPAExecute {
 	 * @throws DockerException
 	 * @throws InterruptedException
 	 */
-	protected static String startContainer(DockerClient docker, String dockerImageName, String iPAGuestPath, String iPAHostPath,
+	@SuppressWarnings("static-access")
+	private static String startContainer(DockerClient docker, String imageName, String iPAGuestPath, String iPAHostPath,
 			String inputDatasetGuestPath, String inputDatasetHostPath, String resultGuestPath, String resultHostPath)
 			throws DockerException, InterruptedException {
 
-		System.out.println("In startContainer  imageName: " + dockerImageName + "  guestPath : " + iPAGuestPath
+		System.out.println("In startContainer  imageName: " + imageName + "  guestPath : " + iPAGuestPath
 				+ "  hostPath: " + iPAHostPath);
 		// First we need a host configuration that specifies the mapping from host
 		// volumes to guest volumes
@@ -85,7 +248,7 @@ public abstract class IPADockerExecute extends IPAExecute {
 		// hostConfig.builder().appendBinds(Bind.from(inputDatasetHostPath).to(inputDatasetGuestPath).readOnly(false).build());
 		System.out.println("In startContainer HostConfig done !!");
 		// Next we need a container configuration.
-		ContainerConfig containerConfig = ContainerConfig.builder().image(dockerImageName).workingDir(iPAGuestPath)
+		ContainerConfig containerConfig = ContainerConfig.builder().image(imageName).workingDir(iPAGuestPath)
 				.hostConfig(hostConfig).build();
 		System.out.println("In startContainer containerConfig done !!");
 		// Now create the container.
@@ -155,7 +318,7 @@ public abstract class IPADockerExecute extends IPAExecute {
 	 * @throws DockerException
 	 * @throws InterruptedException
 	 */
-	protected static int runCommands(DockerClient docker, String containerId, String[][] commands,
+	private static int runCommands(DockerClient docker, String containerId, String[][] commands,
 			StringBuffer lastOutput, AtomicInteger failingCommand) throws DockerException, InterruptedException {
 		StringBuffer outBuf = null;
 		int exitCode = 0;
@@ -249,7 +412,7 @@ public abstract class IPADockerExecute extends IPAExecute {
 		return state1.exitCode();
 	}
 
-	protected static void listContainers(DockerClient docker) throws DockerException, InterruptedException {
+	private static void listContainers(DockerClient docker) throws DockerException, InterruptedException {
 		System.out.println("Listing Containers");
 		final List<Container> containers = docker.listContainers();
 		System.out.println("" + containers.size() + " containers ");
@@ -261,7 +424,7 @@ public abstract class IPADockerExecute extends IPAExecute {
 		System.out.println("========> listContainers is done !!");
 	}
 
-	protected static String getHostPath(String fullPath) throws IOException {
+	private static String getHostPath(String fullPath) throws IOException {
 		// File cwd = new File(".") ;
 		//// if( ! cwd.exists() ) throw new IOException("No . directory!!!") ;
 		//// File hostDir = new File(cwd, fullPath ) ;

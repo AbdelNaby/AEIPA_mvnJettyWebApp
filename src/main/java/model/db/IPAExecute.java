@@ -8,7 +8,5 @@ package model.db;
  *
  */
 public abstract class IPAExecute {
-	public abstract boolean executeIPA(IPADTO iPADTO, 
-			InputDatasetDTO inputDatasetDTO);
-
+	public abstract boolean executeIPA(IPADTO iPADTO, DatasetContainerDTO datasetContainerDTO, String userName);
 }

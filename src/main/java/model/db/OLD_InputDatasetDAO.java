@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author acil
  *
  */
-public class OLD_InputDatasetDAO extends GenericDAO<InputDatasetDTO> {
+public class OLD_InputDatasetDAO extends GenericDAO<OLD_InputDatasetDTO> {
 
 	/**
 	 * 
@@ -38,7 +38,7 @@ public class OLD_InputDatasetDAO extends GenericDAO<InputDatasetDTO> {
 	 * from database row to the DTO object
 	 */
 	@Override
-	protected ArrayList<String> valueList(InputDatasetDTO dto) {
+	protected ArrayList<String> valueList(OLD_InputDatasetDTO dto) {
 		// Filling in values from database row to the DTO object
 		ArrayList<String> valueList = new ArrayList<String>();
 		// valueList.add(dto.getId());
@@ -97,11 +97,11 @@ public class OLD_InputDatasetDAO extends GenericDAO<InputDatasetDTO> {
 	}
 
 	@Override
-	protected ArrayList<InputDatasetDTO> convertArrayListToArrayDTOs(ArrayList<String> arrayList) {
-		ArrayList<InputDatasetDTO> inputDataList = new ArrayList<InputDatasetDTO>();
+	protected ArrayList<OLD_InputDatasetDTO> convertArrayListToArrayDTOs(ArrayList<String> arrayList) {
+		ArrayList<OLD_InputDatasetDTO> inputDataList = new ArrayList<OLD_InputDatasetDTO>();
 		int i = 0;
 		while (arrayList.size() > i) {
-			InputDatasetDTO inputDatasetDTO = new InputDatasetDTO();
+			OLD_InputDatasetDTO inputDatasetDTO = new OLD_InputDatasetDTO();
 			inputDatasetDTO.setUserName(arrayList.get(i++));
 			inputDatasetDTO.setName(arrayList.get(i++));
 			//Type is auto generated

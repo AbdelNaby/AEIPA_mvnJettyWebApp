@@ -20,8 +20,7 @@ public abstract class GenericService<T extends GenericDTO> {
 	public abstract T dTOMapper(ArrayList<String> dTOvaluesList);
 
 	public abstract ArrayList<String> dTOMapper(T dto);
-	public abstract ArrayList<T> retrieveInfobyName(String name);
-	public abstract ArrayList<T> retrieveInfobyType(String type);
+
 	public abstract boolean createNew(T dto);
 	public abstract boolean updateInfo(T oldDTO, T newDTO);
 	public abstract boolean delete(T dto);

@@ -4,15 +4,11 @@
 package model.db;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
-
-import com.google.common.io.Files;
 
 /**
  * @author acil
@@ -32,6 +28,10 @@ public abstract class FolderService<T extends FolderDTO> extends GenericService<
 	public FolderService() 	{
 		// Just for enabling creating objects without any mandatory parameters
 	}
+	
+	public abstract T retrieveInfobyName(String name);
+	public abstract ArrayList<T> retrieveInfobyType(String type);
+
 	/**
 	 * Upload files code is here
 	 */
@@ -64,7 +64,7 @@ public abstract class FolderService<T extends FolderDTO> extends GenericService<
 		try {
 			item.write(new File(dto.getFullPath() + item.getName()));
 			System.out.println("Have Done Uploading File .. "+ dto.getFullPath() + item.getName());	
-			dto.setFilesNameList(item.getName());
+			dto.addtoFilesNameList(item.getName());
 		}
 		catch(Exception e) {
 			System.out.println(e);
@@ -97,15 +97,48 @@ public abstract class FolderService<T extends FolderDTO> extends GenericService<
 	    System.out.println("Done renaming the folder to " + folderPath);
 	    return true;
 	  }
-
+//
+//	/**
+//	 * @return the uploadedFilesNames List
+//	 */
+//	public ArrayList<String> getUploadedFilesNames(T dto) {
+//		return dto.getFilesNameList();
+//	}
+	
 	/**
-	 * @return the uploadedFilesNames List
+	 * @return the filesNameList
 	 */
-	public ArrayList<String> getUploadedFilesNames(T dto) {
-		return dto.getFilesNameList();
+	public ArrayList<String> getFilesNameList(T dto) {
+		File folder = new File(dto.getFullPath());
+		File[] listOfFiles = folder.listFiles();
+		ArrayList<String> fillesList = new ArrayList<String>();
+		    for (int i = 0; i < listOfFiles.length; i++) {
+		      if (listOfFiles[i].isFile()) {
+		        System.out.println("List of Files: File: " + listOfFiles[i].getName());
+		        fillesList.add(listOfFiles[i].getName());
+		      } else if (listOfFiles[i].isDirectory()) {
+		        System.out.println("There are directories inside the folder: Directory: " + listOfFiles[i].getName());
+		      }
+		    }
+		return fillesList;
 	}
-	
-	
+	/**
+	 * @return the foldersNameList
+	 */
+	public ArrayList<String> getFoldersNameList(T dto) {
+		File folder = new File(dto.getFullPath());
+		File[] listOfFolders = folder.listFiles();
+		ArrayList<String> foldersList = new ArrayList<String>();
+		    for (int i = 0; i < listOfFolders.length; i++) {
+		      if (listOfFolders[i].isFile()) {
+		        System.out.println("List of Files: File: " + listOfFolders[i].getName());
+		      } else if (listOfFolders[i].isDirectory()) {
+		        System.out.println("There are directories inside the folder: Directory: " + listOfFolders[i].getName());
+		        foldersList.add(listOfFolders[i].getName());
+		      }
+		    }
+		return foldersList;
+	}
 	
 	public boolean validateData(T dto)
 	{	
@@ -121,7 +154,7 @@ public abstract class FolderService<T extends FolderDTO> extends GenericService<
 		//Checking Name has value
 		if(folderName.isEmpty())
 		{
-			System.out.println("folder Name is mandatory. Please enter a value.");
+			System.out.println("Folder Name is mandatory. Please enter a value.");
 			return false;
 		}
 		return true;

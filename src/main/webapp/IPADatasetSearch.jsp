@@ -25,18 +25,13 @@
 
 					</tr>
 					<tr>
-						<td nowrap>Dataset Type</td>
-						<td><select id="ipatype" name="ipatype">
-								<option value="AllDataset" selected>All</option>
-								<option value="Matching" selected>Image Matching</option>
-								<option value="Edge_Detection">Edge Detection</option>
+						<td nowrap>Dataset Evaluation Type</td>
+						<td><select id="datasetType" name="datasetType">
+								<option value="BOUNDING_BOX" selected>Bounding Box</option>
+								<option value="LABELLED_BOUNDING_BOX">Labeled Bounding Box</option>
 						</select></td>
 					</tr>
-					<tr>
-						<td nowrap>Input Dataset description like</td>
-						<td><input type="text" name="inputdatasetdescription"
-							value="" /></td>
-					</tr>
+
 					<tr>
 						<td><input type="submit" value="Submit" name="Search" /></td>
 						<td><input type="reset" value="Reset" /></td>
@@ -48,11 +43,6 @@
 			</table>
 		</center>
 	</form>
-	<script>
-function iPATypeSelected(selectedValue) {
-    var x = document.getElementById("mySelect").value;
-    document.getElementById("demo").innerHTML = "You selected: " + x;
-}
-</script>
+	
 </body>
 </html>

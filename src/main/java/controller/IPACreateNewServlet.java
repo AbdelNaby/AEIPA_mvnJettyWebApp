@@ -51,7 +51,6 @@ public class IPACreateNewServlet extends HttpServlet {
 			}
 
 			iPA.setUserName(username);
-			iPA.setName(ipaname);
 			iPA.setDescription(description);
 			iPA.setMainFileName(mainfilename);
 			System.out.println("Here is the mainfilename in the IPAcreateservlet: " + iPA.getMainFileName());
