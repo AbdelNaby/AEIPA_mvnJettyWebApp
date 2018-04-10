@@ -10,5 +10,5 @@ import java.util.ArrayList;
  *
  */
 public interface Evaluation_Algo {
-	public ArrayList<Double> evaluate(String resultImgFullPath, String groundTruthImgFullPath);
+	public Confusion_Matrix evaluate(String resultImgFullPath, String groundTruthImgFullPath);
 }

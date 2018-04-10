@@ -113,7 +113,9 @@ public class DatasetService extends FolderService<DatasetDTO> {
 
 	@Override
 	public boolean updateInfo(DatasetDTO oldDTO, DatasetDTO newDTO) {
-		// TODO Auto-generated method stub
+		DatasetDAO datasetDAO = new DatasetDAO();
+		if(datasetDAO.update(newDTO, "NAME", "=", oldDTO.getName()))
+			return true;
 		return false;
 	}
 

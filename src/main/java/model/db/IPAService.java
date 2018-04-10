@@ -212,7 +212,7 @@ public class IPAService extends FolderService<IPADTO> {
 		return iPA.get(0);
 	}
 
-	public boolean executeIPA(IPADTO iPADTO, DatasetContainerDTO datasetContainerDTO, String userName) {
+	public ArrayList<ResultDTO> executeIPA(IPADTO iPADTO, DatasetContainerDTO datasetContainerDTO, String userName) {
 		
 		System.out.println("Inside ... executeIPA");
 		// creating a new benchmark results out of the IPAName and InputDatasetName
@@ -222,13 +222,16 @@ public class IPAService extends FolderService<IPADTO> {
 //			System.out.println("## benchmarkResultFolder has NOT been created..." + resultFolder);
 //		}
 		IPADockerExecute_Java iPADockerExecute_Java = new IPADockerExecute_Java();
-		if(iPADockerExecute_Java.executeIPA(iPADTO, datasetContainerDTO, userName))
-		{
-			System.out.println(" Congrats,,, IPA has been executed successfully ....");
-			return true;
-		}
-		System.out.println("IPA has failed execution ....");
-		return false;
+		ArrayList<ResultDTO> resultDTOList = iPADockerExecute_Java.executeIPA(iPADTO, datasetContainerDTO, userName);
+		
+//		if(iPADockerExecute_Java.executeIPA(iPADTO, datasetContainerDTO, userName))
+//		{
+//			System.out.println(" Congrats,,, IPA has been executed successfully ....");
+//			return true;
+//		}
+//		System.out.println("IPA has failed execution ....");
+//		return false;
+		return resultDTOList;
 	}
 
 	@Override

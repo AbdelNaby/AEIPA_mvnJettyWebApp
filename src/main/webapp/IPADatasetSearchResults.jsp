@@ -30,7 +30,7 @@
 			<c:forEach var="iPADTO" items="${listiPA}">
 				<tr>
 					<td><input type="checkbox" id="ipacheckbox" name="ipacheckbox"
-						value="${iPADTO.name}" onclick="iPAFunction(this)">${iPADTO.name}
+						value="${iPADTO.name}" onclick="iPAFunction(this)" >${iPADTO.name}
 					</td>
 					<td>${iPADTO.description}</td>
 					<td>${iPADTO.type}</td>
@@ -50,8 +50,6 @@
 		<table border="1">
 			<thead>
 				<tr>
-					
-					<th>Input Dataset Sequence Name</th>
 					<th>Dataset Name</th>
 					<th>Input Dataset Description</th>
 					<th>Input Dataset Evaluation Description</th>
@@ -63,9 +61,9 @@
 			<c:forEach var="datasetDTO" items="${inputDatasetDTOList}">
 				<tr>
 					<td><input type="checkbox" id="datasetcheckbox"
-						name="datasetcheckbox" value="${datasetDTO.name}"
-						onclick="datasetFunction(this)">${datasetDTO.name}</td>
-						<td>${datasetDTO.datasetName}</td>
+						name="datasetcheckbox" value="${datasetDTO.datasetName}"
+						onclick="datasetFunction(this)" >${datasetDTO.datasetName} </td>
+						
 					<td>${datasetDTO.description}</td>
 					<td>${datasetDTO.evaluationDescription}</td>
 					<td>${datasetDTO.keyWords}</td>

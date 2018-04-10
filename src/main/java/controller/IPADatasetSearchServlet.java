@@ -67,7 +67,7 @@ public class IPADatasetSearchServlet extends HttpServlet {
 			ArrayList<DatasetDTO> inputDatasetDTOList = new ArrayList<DatasetDTO>();
 
 			for (int i = 0; i < datasetContainerDTOList.size(); i++) {
-				inputDatasetDTOList.addAll(datasetContainerDTOList.get(i).getInputSequenceDatasetDTOList());
+				inputDatasetDTOList.add(datasetContainerDTOList.get(i).getInputSequenceDatasetDTOList().get(0));
 			}
 
 			// // Retrieving only the input datasets associated with benchmarkdatasets with

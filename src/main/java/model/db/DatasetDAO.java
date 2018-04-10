@@ -51,6 +51,7 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 		valueList.add(dto.getResultType().toString());
 		valueList.add(dto.getxYLabelSheetName());
 		valueList.add(dto.getDatasetName());
+		valueList.add(dto.getConfusionMatrixStr());
 		return valueList;
 	}
 
@@ -94,8 +95,9 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 			datasetDTO.setDatasetName(arrayList.get(i+9));
 			// Full path is generated automatically, there is no need to set it
 			datasetDTO.setFullPath();
+			datasetDTO.setConfusionMatrixStr(arrayList.get(i+10));
 			datasetDTOList.add(datasetDTO);
-			i+=10;
+			i+=11;
 		}
 		return datasetDTOList;
 	}
@@ -120,5 +122,6 @@ public class DatasetDAO extends GenericDAO<DatasetDTO> {
 		attributeList.add("RESULT_TYPE");
 		attributeList.add("XYLABEL_SHEETNAME");
 		attributeList.add("DATASETNAME");
+		attributeList.add("CONFUSION_MATRIX_PERRESULTFOLDER");
 	}
 }

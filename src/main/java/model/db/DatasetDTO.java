@@ -3,6 +3,7 @@
  */
 package model.db;
 
+
 /**
  * @author acil
  *
@@ -16,6 +17,8 @@ public abstract class DatasetDTO extends FolderDTO {
 	private String xYLabelSheetName;
 	private String keyWords;
 	private String evaluationDescription;
+	private Confusion_Matrix confusion_Matrix = new Confusion_Matrix();
+	//private String ConfusionMatrixStr;
 
 	protected DatasetDTO() {
 		super();
@@ -163,5 +166,60 @@ public abstract class DatasetDTO extends FolderDTO {
 	 */
 	public void setEvaluationDescription(String evaluationDescription) {
 		this.evaluationDescription = evaluationDescription;
+	}
+//	/**
+//	 * @return the confusion_Matrix_perResultFolder
+//	 */
+//	public String getConfusion_Matrix_perResultFolder() {
+//
+//		return getConfusion_Matrix().toString();
+//	}
+//	/**
+//	 * @param confusion_Matrix_perResultFolder the confusion_Matrix_perResultFolder to set
+//	 */
+//	public void setConfusion_Matrix_perResultFolder(String confusion_Matrix_perResultFolder) {
+//		if(confusion_Matrix_perResultFolder != null) {
+//		String[] selectedIPANameList = confusion_Matrix_perResultFolder.split(" @nd# ");
+//		getConfusion_Matrix().settPR(Double.parseDouble(selectedIPANameList[0]));
+//		getConfusion_Matrix().settNR(Double.parseDouble(selectedIPANameList[1]));
+//		getConfusion_Matrix().setfNR(Double.parseDouble(selectedIPANameList[2]));
+//		getConfusion_Matrix().setfPR(Double.parseDouble(selectedIPANameList[3]));
+//		}else
+//		{
+//			setConfusion_Matrix(null);
+//		}
+//	}
+	/**
+	 * @return the confusion_Matrix
+	 */
+	public Confusion_Matrix getConfusion_Matrix() {
+		return confusion_Matrix;
+	}
+	/**
+	 * @param confusion_Matrix the confusion_Matrix to set
+	 */
+	public void setConfusion_Matrix(Confusion_Matrix confusion_Matrix) {
+		this.confusion_Matrix = confusion_Matrix;
+	}
+	/**
+	 * @return the confusionMatrixStr
+	 */
+	public String getConfusionMatrixStr() {
+		return confusion_Matrix.toString();
+	}
+	/**
+	 * @param confusionMatrixStr the confusionMatrixStr to set
+	 */
+	public void setConfusionMatrixStr(String confusionMatrixStr) {
+		if(confusionMatrixStr != null) {
+			String[] selectedIPANameList = confusionMatrixStr.split(" @nd# ");
+			confusion_Matrix.settPR(Double.parseDouble(selectedIPANameList[0]));
+			confusion_Matrix.settNR(Double.parseDouble(selectedIPANameList[1]));
+			confusion_Matrix.setfNR(Double.parseDouble(selectedIPANameList[2]));
+			confusion_Matrix.setfPR(Double.parseDouble(selectedIPANameList[3]));
+			}else
+			{
+				confusion_Matrix = null;
+			}
 	}
 }

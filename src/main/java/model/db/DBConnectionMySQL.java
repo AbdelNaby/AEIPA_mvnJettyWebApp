@@ -106,9 +106,10 @@ public class DBConnectionMySQL extends DBConnection {
 		String queryStatement = "update " + tableName + " set ";
 		int size = attributeList.size();
 		for (int i = 0; i < size-1; i++) {
-			queryStatement += attributeList.get(i) + " = " + valueList.get(i) + " , ";
+			queryStatement += attributeList.get(i) + " = '" + valueList.get(i) + "' , ";
 		}
-		queryStatement += attributeList.get(size)+ " = " + valueList.get(size) + " where " + attributeValue + conditionOp + " ?";
+		queryStatement += attributeList.get(size-1)+ " = '" + valueList.get(size-1) + "' where " + attributeValue + conditionOp + " ?";
+		System.out.println("queryStatement is : " + queryStatement);
 		PreparedStatement prepareStat;	
 		try {
 			prepareStat = dBConn.prepareStatement(queryStatement);
@@ -118,11 +119,11 @@ public class DBConnectionMySQL extends DBConnection {
 		
 			prepareStat.close();
 		} catch (SQLException e) {
-			System.out.println(" Data is NOT  updates successfully");
+			System.out.println(" Data is NOT  updated successfully");
 			e.printStackTrace();
 			return false;
 		}
-		System.out.println(" Data  updates=d successfully");
+		System.out.println(" Data  updated successfully");
 		return true;
 	}
 

@@ -21,7 +21,7 @@
 						<td colspan="2">Please browse and select the file(s) to be uploaded </td>
 					</tr>
 					<tr>
-						<td><input type="file" name="file" multiple /></td>
+						<td><input type="file" name="file" multiple required/></td>
 						<td><input type="submit" value="Upload" /></td>
 					</tr>
 				</tbody>

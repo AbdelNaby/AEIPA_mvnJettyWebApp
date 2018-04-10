@@ -50,36 +50,86 @@ public class IPAJavaDockerExecuteServlet extends HttpServlet {
 		System.out.println();
 		
 
-		ArrayList<String> selectedDatasetNameList = new ArrayList<String>(Arrays.asList(selectedDatasetList.split(" @nd# ")));
-		ArrayList<String> selectedIPANameList = new ArrayList<String>(Arrays.asList(selectedIPAList.split(" @nd# ")));
+		ArrayList<String> executedDatasetNameList = new ArrayList<String>(Arrays.asList(selectedDatasetList.split(" @nd# ")));
+		ArrayList<String> executedIPANameList = new ArrayList<String>(Arrays.asList(selectedIPAList.split(" @nd# ")));
+//		ArrayList<String> executedinputDatasetDTOList = new ArrayList<String>();
+		ArrayList<DatasetContainerDTO> datasetContainerDTOList = new ArrayList<DatasetContainerDTO>();
+		System.out.println(executedDatasetNameList);
+		System.out.println("Inside IPAJavaDockerExecuteServlet the First selectedIPANameList are: " + executedIPANameList);
 
-		System.out.println(selectedDatasetNameList);
-		System.out.println("Inside IPAJavaDockerExecuteServlet the First selectedIPANameList are: " + selectedIPANameList);
-
-		System.out.println("Inside IPAJavaDockerExecuteServlet the first selectedDatasetNameList are: "+ selectedDatasetNameList);
-		for (int i = 0; i < selectedIPANameList.size(); i++) {
+		System.out.println("Inside IPAJavaDockerExecuteServlet the first selectedDatasetNameList are: "+ executedDatasetNameList);
+		ArrayList<ResultDTO> resultDTOList = new ArrayList<ResultDTO>();
+		DatasetService datasetService = new DatasetService();
+		for (int k = 0; k < executedDatasetNameList.size(); k++) {
+			DatasetContainerDTO datasetContainerDTO = datasetService.retrievebyDatasetName(executedDatasetNameList.get(k));
+			datasetContainerDTOList.add(datasetContainerDTO);
+			System.out.println("****************");
+			System.out.println("****************");
+			System.out.println("****************");
+			System.out.println("****************");
+			System.out.println("DatasetName is: " + datasetContainerDTO.getInputSequenceDatasetDTOList().get(0).getDatasetName());
+		}
+		ArrayList<IPAExecutionResultReportDTO> iPAExecutionResultReportDTOList = new ArrayList<IPAExecutionResultReportDTO>();
+		
+		for (int i = 0; i < executedIPANameList.size(); i++) {
 			IPAService iPAService = new IPAService();
-			IPADTO iPADTO = iPAService.retrieveInfobyName(selectedIPANameList.get(i));
+			IPADTO iPADTO = iPAService.retrieveInfobyName(executedIPANameList.get(i));
 			// preparing the input dataset
-			for (int k = 0; k < selectedDatasetNameList.size(); k++) {
-				DatasetService datasetService = new DatasetService();
-				DatasetContainerDTO datasetContainerDTO = datasetService
-						.retrieveDataset_InputDTOName(selectedDatasetNameList.get(k));
-				System.out.println("****************"+ selectedIPANameList.size());
-				System.out.println("****************"+ selectedDatasetNameList.size());
-				System.out.println("****************");
-				System.out.println("Providing to the IPA execution With Input Dataset Name: " + datasetContainerDTO.getInputSequenceDatasetDTOList().get(0).getName());
-				System.out.println("****************");
-				System.out.println("****************");
-				System.out.println("****************");
+			for (int k = 0; k < datasetContainerDTOList.size(); k++) {
+				DatasetContainerDTO datasetContainerDTO = datasetContainerDTOList.get(k);
 				//inputDatasetDTO.getFilesNameList();
 				// providing the input dataset to the execution
-				iPAService.executeIPA(iPADTO, datasetContainerDTO, username);
+				//System.out.println("The Dataset is: " + datasetContainerDTO.getInputSequenceDatasetDTOList().get(0).getDatasetName());
+				ArrayList<ResultDTO> tempResultDTOList = new ArrayList<ResultDTO>();
+				tempResultDTOList.addAll(iPAService.executeIPA(iPADTO, datasetContainerDTO, username));
+				
+				
+				IPAExecutionResultReportDTO tempIPAExecutionResultReportDTO = new IPAExecutionResultReportDTO();
+				tempIPAExecutionResultReportDTO.setDatasetName(datasetContainerDTOList.get(k).getResultSequenceDatasettDTOList().get(0).getDatasetName());
+				
+
+				for(int j=0; j< tempResultDTOList.size() ; j++)
+				{
+//					resultStr.add(datasetContainerDTOList.get(i).getResultSequenceDatasettDTOList().get(j).getConfusion_Matrix().gettPR());
+//					resultStr.add(datasetContainerDTOList.get(i).getResultSequenceDatasettDTOList().get(j).getConfusion_Matrix().gettPR());
+//					resultStr.add(datasetContainerDTOList.get(i).getResultSequenceDatasettDTOList().get(j).getConfusion_Matrix().gettPR());
+//					resultStr.add(datasetContainerDTOList.get(i).getResultSequenceDatasettDTOList().get(j).getConfusion_Matrix().gettPR());
+					SeqDatasetResult tempSeqDatasetResult = new SeqDatasetResult();
+
+					tempSeqDatasetResult.settPR(tempResultDTOList.get(j).getConfusion_Matrix().gettPR());
+					tempSeqDatasetResult.settNR(tempResultDTOList.get(j).getConfusion_Matrix().gettNR());
+					tempSeqDatasetResult.setfNR(tempResultDTOList.get(j).getConfusion_Matrix().getfNR());
+					tempSeqDatasetResult.setfPR(tempResultDTOList.get(j).getConfusion_Matrix().getfPR());
+					tempSeqDatasetResult.setDatasetSeqName(tempResultDTOList.get(j).getName());
+					tempIPAExecutionResultReportDTO.getSeqDatasetResultList().add(tempSeqDatasetResult);
+					
+					System.out.println("  --> --> --> ");
+					System.out.println("  --> --> --> ");
+					System.out.println("  --> --> --> i: "+ i);
+					System.out.println("  --> --> --> j: " + j);
+					System.out.println("  --> --> --> " + tempSeqDatasetResult.getDatasetSeqName());
+				}
+				iPAExecutionResultReportDTOList.add(tempIPAExecutionResultReportDTO);
+				resultDTOList.addAll(tempResultDTOList);
 			}
 		}
-		PrintWriter writer = response.getWriter();
-		writer.println("All Done :) !");
-		response.sendRedirect("ExecutionReport.jsp");
+//		ArrayList<String> resultStr = new ArrayList<String>();
+//		for(int i=0; i<datasetContainerDTOList.size(); i++)
+//		{
+//			
+//			
+//		}
+//		for(int i=0; i< executedDatasetNameList.size() ; i++)
+//		{
+//			executedinputDatasetDTOList.add(executedDatasetNameList.get(i).get);
+//		}
+		
+		session.setAttribute("executedIPANameList", executedIPANameList);
+		session.setAttribute("iPAExecutionResultReportDTOList", iPAExecutionResultReportDTOList);
+		//session.setAttribute("resultDTOList", resultDTOList);
+		//PrintWriter writer = response.getWriter();
+		//writer.println("All Done :) !");
+		response.sendRedirect("ResultsReport.jsp");
 	}
 
 }
